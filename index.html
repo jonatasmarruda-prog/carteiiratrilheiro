@@ -38,159 +38,63 @@
             filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
         }
         h1 { 
-            color: #d4af37;
-            font-weight: 900;
-            font-size: 26px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
+            color: #d4af37; font-weight: 900; font-size: 26px; margin-bottom: 5px; text-transform: uppercase;
         }
-        p {
-            color: #b3b3b3;
-            font-size: 13px;
-            margin-bottom: 35px;
-        }
-        .input-group {
-            text-align: left;
-            margin-bottom: 22px;
-        }
+        p { color: #b3b3b3; font-size: 13px; margin-bottom: 35px; }
+        .input-group { text-align: left; margin-bottom: 22px; }
         .input-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: #d4af37;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: block; font-size: 12px; font-weight: 600; color: #d4af37; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
         }
         input[type="text"], input[type="file"] {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.4);
-            color: white;
-            box-sizing: border-box;
-            font-size: 15px;
-            font-family: 'Montserrat', sans-serif;
-            transition: 0.3s;
+            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.4); color: white; box-sizing: border-box; font-size: 15px; font-family: 'Montserrat', sans-serif; transition: 0.3s;
         }
-        input[type="text"]:focus {
-            border-color: #d4af37;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-            outline: none;
-        }
+        input[type="text"]:focus { border-color: #d4af37; outline: none; }
         input[type="file"]::file-selector-button {
-            background: linear-gradient(135deg, #333, #222);
-            color: #d4af37;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-right: 15px;
-            font-weight: 600;
+            background: linear-gradient(135deg, #333, #222); color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.5); padding: 10px 15px; border-radius: 8px; cursor: pointer; margin-right: 15px; font-weight: 600;
         }
-        button {
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
+        button { border: none; border-radius: 12px; cursor: pointer; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         #gerarBtn {
-            background: linear-gradient(135deg, #d4af37 0%, #aa8529 100%);
-            color: #0a0a0a;
-            padding: 18px 20px;
-            width: 100%;
-            font-size: 16px;
-            margin-top: 15px;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, #d4af37 0%, #aa8529 100%); color: #0a0a0a; padding: 18px 20px; width: 100%; font-size: 16px; margin-top: 15px; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
         }
-        #gerarBtn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5);
-        }
-        #action-buttons {
-            display: none; 
-            gap: 15px;
-            margin-top: 25px;
-            width: 100%;
-        }
-        #action-buttons button {
-            flex: 1; 
-            padding: 16px 10px;
-            font-size: 13px; 
-        }
-        #downloadBtn {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
-            color: white;
-            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
-        }
-        #downloadBtn:hover {
-            box-shadow: 0 12px 25px rgba(46, 125, 50, 0.5);
-            transform: translateY(-2px);
-        }
-        #voltarBtn {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        #voltarBtn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-        #canvas-container {
-            margin-top: 20px;
-            width: 100%;
-            display: none;
-        }
-        canvas {
-            width: 100%;
-            max-width: 340px;
-            border-radius: 16px;
-            border: 2px solid rgba(212, 175, 55, 0.6);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
+        #gerarBtn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5); }
+        #action-buttons { display: none; gap: 15px; margin-top: 25px; width: 100%; }
+        #action-buttons button { flex: 1; padding: 16px 10px; font-size: 13px; }
+        #downloadBtn { background: linear-gradient(135deg, #2e7d32, #1b5e20); color: white; }
+        #voltarBtn { background: rgba(255, 255, 255, 0.05); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); }
+        #canvas-container { margin-top: 20px; width: 100%; display: none; }
+        canvas { width: 100%; max-width: 340px; border-radius: 16px; border: 2px solid rgba(212, 175, 55, 0.6); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros" class="logo-form">
-    
     <h1>CREDENCIAL VIP</h1>
     
     <div id="form-container">
         <p>Preencha os dados do trilheiro abaixo</p>
-
         <div class="input-group">
             <label>Nome do Trilheiro</label>
-            <input type="text" id="nomeInput" placeholder="Ex: Carlos Silva" maxlength="18">
+            <input type="text" id="nomeInput" placeholder="Ex: Jonatas Marruda" maxlength="20">
         </div>
-
         <div class="input-group">
             <label>Membro Desde (Ano)</label>
             <input type="text" id="anoInput" placeholder="Ex: 2026" maxlength="4">
         </div>
-
         <div class="input-group">
             <label>Cidade - Estado</label>
-            <input type="text" id="cidadeInput" placeholder="Ex: Rondonópolis - MT" maxlength="25">
+            <input type="text" id="cidadeInput" value="Rondonópolis - MT" maxlength="25">
         </div>
-        
         <div class="input-group">
             <label>Foto de Perfil</label>
             <input type="file" id="fotoInput" accept="image/*">
         </div>
-
-        <button id="gerarBtn" onclick="gerarCracha()">1. Forjar Credencial 3D</button>
+        <button id="gerarBtn" onclick="gerarCracha()">1. Forjar Credencial Premium</button>
     </div>
 
     <div id="canvas-container">
         <canvas id="crachaCanvas" width="1080" height="1920"></canvas>
     </div>
-
     <div id="action-buttons">
         <button id="downloadBtn" onclick="baixarCracha()">Baixar Arte</button>
         <button id="voltarBtn" onclick="voltarInicio()">Voltar ao Início</button>
@@ -208,9 +112,33 @@
         });
     }
 
-    document.fonts.load("90px 'Great Vibes'").then(function() {
-        console.log('Fonte cursiva carregada');
-    });
+    document.fonts.load("100px 'Great Vibes'").then(() => console.log('Fontes OK'));
+    document.fonts.load("900 130px 'Montserrat'").then(() => console.log('Fontes OK'));
+
+    // Função para gerar número aleatório tipo TR-084
+    function gerarCarteira() {
+        return "TR-" + Math.floor(Math.random() * 900 + 100);
+    }
+
+    // Função para pegar data atual
+    function obterDataEmissao() {
+        const hoje = new Date();
+        return ("0" + hoje.getDate()).slice(-2) + "/" + ("0" + (hoje.getMonth() + 1)).slice(-2) + "/" + hoje.getFullYear();
+    }
+
+    // Função para desenhar Texto 3D Real (Extrusão)
+    function draw3DText(ctx, text, x, y, font, colorTop, colorSide, depth) {
+        ctx.font = font;
+        ctx.textAlign = "center";
+        // Desenha a extrusão (camadas de sombra profundas)
+        ctx.fillStyle = colorSide;
+        for (let i = depth; i > 0; i--) {
+            ctx.fillText(text, x, y + i);
+        }
+        // Desenha a face do texto
+        ctx.fillStyle = colorTop;
+        ctx.fillText(text, x, y);
+    }
 
     async function gerarCracha() {
         const btn = document.getElementById('gerarBtn');
@@ -220,179 +148,148 @@
             const canvas = document.getElementById('crachaCanvas');
             const ctx = canvas.getContext('2d');
             
-            const nome = document.getElementById('nomeInput').value || 'TRILHEIRO';
+            const nomeRaw = document.getElementById('nomeInput').value || 'Jonatas Marruda';
             const ano = document.getElementById('anoInput').value || '2026';
             const cidade = document.getElementById('cidadeInput').value || 'Rondonópolis - MT';
             const fotoInput = document.getElementById('fotoInput').files[0];
+            const numCarteira = gerarCarteira();
+            const dataEmissao = obterDataEmissao();
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // 1. FUNDO COM EFEITO VINHETA CINEMATOGRÁFICA
+            // 1. FUNDO PREMIUM
             const bgImg = await carregarImagem('fundo.jpg');
             if (bgImg) {
                 ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-            } else {
-                ctx.fillStyle = '#0a140e';
+                // Vinheta Cinematográfica
+                const vinheta = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 200, canvas.width/2, canvas.height/2, 1200);
+                vinheta.addColorStop(0, 'rgba(0,0,0,0)');
+                vinheta.addColorStop(1, 'rgba(0,0,0,0.8)');
+                ctx.fillStyle = vinheta;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else {
+                const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                grad.addColorStop(0, '#0c1f13'); grad.addColorStop(1, '#000000');
+                ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
-            
-            // Efeito Vinheta (Escurece as bordas)
-            const vinheta = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 200, canvas.width/2, canvas.height/2, 1200);
-            vinheta.addColorStop(0, 'rgba(0,0,0,0)');
-            vinheta.addColorStop(1, 'rgba(0,0,0,0.85)');
-            ctx.fillStyle = vinheta;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // 2. LOGO NO TOPO
             const logoImg = await carregarImagem('logo.png');
             if (logoImg) {
-                const logoWidth = 280;
-                const logoHeight = (logoImg.height / logoImg.width) * logoWidth;
-                ctx.drawImage(logoImg, (canvas.width / 2) - (logoWidth / 2), 70, logoWidth, logoHeight);
+                const logoW = 280; const logoH = (logoImg.height / logoImg.width) * logoW;
+                ctx.drawImage(logoImg, (canvas.width / 2) - (logoW / 2), 40, logoW, logoH);
             }
 
-            // 3. TÍTULO: METALIZADO 3D
-            ctx.textAlign = "center";
-            ctx.font = "900 80px 'Montserrat', sans-serif";
-            ctx.shadowColor = "rgba(0, 0, 0, 0.95)";
-            ctx.shadowBlur = 20;
-            ctx.shadowOffsetY = 10;
+            // 3. TÍTULO 3D (Extrusão Real)
+            const gradTop = ctx.createLinearGradient(0, 250, 0, 450);
+            gradTop.addColorStop(0, '#fff6cc');
+            gradTop.addColorStop(0.5, '#d4af37');
+            gradTop.addColorStop(1, '#a67c00');
             
-            const gradText = ctx.createLinearGradient(0, 300, 0, 480);
-            gradText.addColorStop(0, '#fff5c0'); // Luz alta do sol
-            gradText.addColorStop(0.3, '#d4af37'); // Ouro base
-            gradText.addColorStop(0.6, '#8a660d'); // Sombra do metal
-            gradText.addColorStop(0.8, '#d4af37'); // Reflexo
-            gradText.addColorStop(1, '#523a01'); // Base escura
-            ctx.fillStyle = gradText;
-            
-            ctx.fillText("TRILHEIRO", canvas.width / 2, 370);
-            ctx.fillText("OFICIAL", canvas.width / 2, 460);
-            ctx.shadowColor = "transparent";
+            draw3DText(ctx, "TRILHEIRO", canvas.width/2, 330, "900 95px 'Montserrat'", gradTop, "#382900", 12);
+            draw3DText(ctx, "OFICIAL", canvas.width/2, 430, "900 95px 'Montserrat'", gradTop, "#382900", 12);
 
-            // 4. FOTO DE PERFIL COM BORDA DUPLA E GLOW
+            // 4. FOTO DE PERFIL COM GLOW
             if (fotoInput) {
                 const imgUrl = URL.createObjectURL(fotoInput);
                 const userImg = await carregarImagem(imgUrl);
-                
                 if (userImg) {
-                    const centerX = canvas.width / 2;
-                    const centerY = 780; 
-                    const radius = 240; 
-
-                    // Efeito Glow Neon Dourado atrás da foto
-                    ctx.beginPath();
-                    ctx.arc(centerX, centerY, radius + 15, 0, Math.PI * 2, true);
-                    ctx.shadowColor = "rgba(212, 175, 55, 0.8)";
-                    ctx.shadowBlur = 40;
-                    ctx.fillStyle = "#000";
-                    ctx.fill();
-                    ctx.shadowColor = "transparent";
-
-                    // Recorte e desenho da foto
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-                    ctx.closePath();
-                    ctx.clip();
-                    ctx.drawImage(userImg, centerX - radius, centerY - radius, radius * 2, radius * 2);
-                    ctx.restore();
+                    const cx = canvas.width / 2; const cy = 740; const r = 260; 
                     
-                    // Anel Externo Grosso
-                    ctx.beginPath();
-                    ctx.arc(centerX, centerY, radius + 10, 0, Math.PI * 2, true);
-                    ctx.lineWidth = 8;
-                    ctx.strokeStyle = "#d4af37";
-                    ctx.stroke();
+                    // Efeito Glow Dourado
+                    ctx.beginPath(); ctx.arc(cx, cy, r+10, 0, Math.PI*2);
+                    ctx.shadowColor = "rgba(212, 175, 55, 0.9)"; ctx.shadowBlur = 50;
+                    ctx.fillStyle = "#000"; ctx.fill(); ctx.shadowColor = "transparent";
 
-                    // Anel Interno Fino colado na foto
-                    ctx.beginPath();
-                    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-                    ctx.lineWidth = 4;
-                    ctx.strokeStyle = "#ffe270";
-                    ctx.stroke();
+                    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.clip();
+                    ctx.drawImage(userImg, cx - r, cy - r, r*2, r*2); ctx.restore();
+                    
+                    // Bordas Duplas
+                    ctx.beginPath(); ctx.arc(cx, cy, r+12, 0, Math.PI*2); ctx.lineWidth=10; ctx.strokeStyle="#d4af37"; ctx.stroke();
+                    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.lineWidth=4; ctx.strokeStyle="#fff0a8"; ctx.stroke();
                 }
             }
 
-            // 5. NOME DO USUÁRIO 3D
-            ctx.font = "900 100px 'Montserrat', sans-serif";
-            ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
-            ctx.shadowBlur = 15;
-            ctx.shadowOffsetY = 6;
-            ctx.fillStyle = "#FFFFFF"; 
+            // 5. NOME DO USUÁRIO 3D GIGANTE
+            const nomeSplit = nomeRaw.split(' ');
+            const primeiroNome = nomeSplit[0];
+            const sobrenome = nomeSplit.length > 1 ? nomeSplit[1] : "";
             
-            const primeiroNome = nome.split(' ')[0];
-            ctx.fillText(primeiroNome.toUpperCase(), canvas.width / 2, 1170);
-            ctx.shadowColor = "transparent";
-
-            // 6. CAIXA DE INFORMAÇÕES COM MARCA D'ÁGUA
-            ctx.fillStyle = "rgba(10, 15, 12, 0.85)";
-            ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
-            ctx.lineWidth = 2;
-            
-            const boxX = (canvas.width/2) - 420;
-            const boxY = 1220;
-            const boxW = 840;
-            const boxH = 170;
-            
-            ctx.beginPath();
-            ctx.roundRect(boxX, boxY, boxW, boxH, 25);
-            ctx.fill();
-            ctx.stroke();
-
-            // Marca d'água da logo dentro da caixa
-            if (logoImg) {
-                ctx.globalAlpha = 0.06; // Quase transparente
-                ctx.drawImage(logoImg, boxX + 250, boxY - 50, 350, 350);
-                ctx.globalAlpha = 1.0; // Restaura a opacidade normal
+            draw3DText(ctx, primeiroNome.toUpperCase(), canvas.width/2, 1140, "900 120px 'Montserrat'", "#FFFFFF", "#555555", 8);
+            if(sobrenome) {
+                draw3DText(ctx, sobrenome.toUpperCase(), canvas.width/2, 1250, "900 120px 'Montserrat'", "#d4af37", "#4a3600", 8);
             }
 
-            ctx.font = "800 32px 'Montserrat', Arial";
-            ctx.textAlign = "right";
-            ctx.fillStyle = "#d4af37";
-            ctx.fillText("Membro Desde:", (canvas.width/2) - 30, 1280);
-            ctx.fillText("Expedição:", (canvas.width/2) - 30, 1345);
+            // 6. PAINEL DE INFORMAÇÕES (Grade 2x2)
+            const boxY = sobrenome ? 1320 : 1230; // Ajusta a altura da caixa se tiver sobrenome
+            
+            ctx.fillStyle = "rgba(10, 15, 12, 0.9)";
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.5)";
+            ctx.lineWidth = 3;
+            ctx.beginPath(); ctx.roundRect((canvas.width/2)-460, boxY, 920, 220, 20); ctx.fill(); ctx.stroke();
+            
+            // Linhas internas da grade
+            ctx.beginPath();
+            ctx.moveTo(canvas.width/2, boxY + 20); ctx.lineTo(canvas.width/2, boxY + 200); // Vertical
+            ctx.moveTo((canvas.width/2)-440, boxY + 110); ctx.lineTo((canvas.width/2)+440, boxY + 110); // Horizontal
+            ctx.strokeStyle = "rgba(212, 175, 55, 0.2)"; ctx.lineWidth = 2; ctx.stroke();
 
+            // Textos da Grade
             ctx.textAlign = "left";
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillText(ano, (canvas.width/2) + 10, 1280);
-            ctx.fillText(cidade.toUpperCase(), (canvas.width/2) + 10, 1345);
+            
+            // Top Left (Trilheiro Desde)
+            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("🥾 TRILHEIRO DESDE", 100, boxY + 50);
+            ctx.fillStyle = "#d4af37"; ctx.font = "900 45px 'Montserrat'"; ctx.fillText(ano, 100, boxY + 95);
 
-            // 7. QR CODE GERADO AUTOMATICAMENTE VIA API (Instagram Oficial)
-            // Não precisa mais do arquivo qr.png no GitHub!
+            // Top Right (Carteira)
+            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("🛡️ CARTEIRA Nº", 570, boxY + 50);
+            ctx.fillStyle = "#d4af37"; ctx.font = "900 45px 'Montserrat'"; ctx.fillText(numCarteira, 570, boxY + 95);
+
+            // Bottom Left (Cidade)
+            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("📍 CIDADE", 100, boxY + 160);
+            ctx.fillStyle = "#ffffff"; ctx.font = "800 35px 'Montserrat'"; ctx.fillText(cidade.toUpperCase(), 100, boxY + 200);
+
+            // Bottom Right (Emissão)
+            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("📅 EMITIDO EM", 570, boxY + 160);
+            ctx.fillStyle = "#ffffff"; ctx.font = "800 35px 'Montserrat'"; ctx.fillText(dataEmissao, 570, boxY + 200);
+
+            // 7. QR CODE API E SELOS
+            const qrY = boxY + 250;
             const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://instagram.com/trilheiros.roomt&margin=2";
             const qrImg = await carregarImagem(qrUrl);
             
-            const alturaQR = 1440;
-            const tamanhoQR = 230;
-            
             if (qrImg) {
-                ctx.drawImage(qrImg, (canvas.width / 2) - (tamanhoQR/2), alturaQR, tamanhoQR, tamanhoQR);
-                // Borda do QR Code
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = "#d4af37";
-                ctx.strokeRect((canvas.width / 2) - (tamanhoQR/2), alturaQR, tamanhoQR, tamanhoQR);
+                ctx.drawImage(qrImg, (canvas.width / 2) - 100, qrY, 200, 200);
+                ctx.lineWidth = 4; ctx.strokeStyle = "#d4af37"; ctx.strokeRect((canvas.width / 2) - 100, qrY, 200, 200);
             }
+            ctx.textAlign = "center"; ctx.font = "800 30px 'Montserrat'"; ctx.fillStyle = "#FFFFFF";
+            ctx.fillText("@trilheiros.roomt", canvas.width / 2, qrY + 240);
 
+            // Selos Dourados (Cantos Inferiores)
+            function desenharSelo(cx, cy, texto1, texto2) {
+                ctx.beginPath(); ctx.arc(cx, cy, 60, 0, Math.PI*2);
+                ctx.fillStyle = "rgba(0,0,0,0.8)"; ctx.fill();
+                ctx.lineWidth = 4; ctx.strokeStyle = "#d4af37"; ctx.stroke();
+                ctx.beginPath(); ctx.arc(cx, cy, 50, 0, Math.PI*2); ctx.setLineDash([5, 5]); ctx.stroke(); ctx.setLineDash([]);
+                ctx.textAlign = "center"; ctx.fillStyle = "#d4af37";
+                ctx.font = "800 16px 'Montserrat'"; ctx.fillText(texto1, cx, cy - 5);
+                ctx.fillText(texto2, cx, cy + 15);
+            }
+            desenharSelo(140, qrY + 100, "MEMBRO", "OFICIAL");
+            desenharSelo(940, qrY + 100, "CREDENCIAL", "OFICIAL");
+
+            // 8. ASSINATURA COMPLETA
             ctx.textAlign = "center";
-            ctx.font = "800 42px 'Montserrat'";
-            ctx.fillStyle = "#FFFFFF";
-            ctx.letterSpacing = "2px";
-            ctx.fillText("@trilheiros.roomt", canvas.width / 2, alturaQR + tamanhoQR + 60);
-            ctx.letterSpacing = "0px";
-
-            // 8. ASSINATURA OFICIAL DO GUIA
-            ctx.font = "400 110px 'Great Vibes', cursive";
+            ctx.font = "400 100px 'Great Vibes', cursive";
             ctx.fillStyle = "#FFFFFF";
             ctx.fillText("Jonatas Marruda", canvas.width / 2, 1820);
 
-            ctx.font = "800 24px 'Montserrat', sans-serif";
+            ctx.font = "800 20px 'Montserrat', sans-serif";
             ctx.fillStyle = "#d4af37";
-            ctx.letterSpacing = "4px";
-            ctx.fillText("GUIA DE TURISMO", canvas.width / 2, 1870);
+            ctx.letterSpacing = "2px";
+            ctx.fillText("GUIA DE TURISMO • FUNDADOR DOS TRILHEIROS DE RONDONÓPOLIS", canvas.width / 2, 1870);
             ctx.letterSpacing = "0px";
 
-            // Troca de telas
             document.getElementById('form-container').style.display = 'none';
             document.getElementById('canvas-container').style.display = 'block';
             document.getElementById('action-buttons').style.display = 'flex';
@@ -400,19 +297,13 @@
         } catch (erro) {
             alert("Erro ao processar: " + erro.message);
         } finally {
-            btn.innerText = "1. Forjar Credencial 3D";
+            btn.innerText = "1. Forjar Credencial Premium";
         }
     }
 
     function voltarInicio() {
         document.getElementById('canvas-container').style.display = 'none';
         document.getElementById('action-buttons').style.display = 'none';
-        
-        document.getElementById('nomeInput').value = '';
-        document.getElementById('anoInput').value = '';
-        document.getElementById('cidadeInput').value = '';
-        document.getElementById('fotoInput').value = '';
-        
         document.getElementById('form-container').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -425,6 +316,5 @@
         link.click();
     }
 </script>
-
 </body>
 </html>
