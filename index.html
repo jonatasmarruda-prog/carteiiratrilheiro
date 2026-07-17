@@ -2,78 +2,95 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credencial Oficial | Trilheiros de Rondonópolis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Credencial VIP Trilheiros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        body { margin: 0; background: #050505; color: #fff; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .app-container { width: 100%; max-width: 400px; }
-        
-        /* Formulário Premium */
-        .painel { background: #0f0f0f; padding: 30px; border-radius: 20px; border: 2px solid #d4af37; box-shadow: 0 0 40px rgba(212,175,55,0.15); text-align: center; }
-        h3 { color: #d4af37; font-weight: 900; font-size: 24px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        p { font-size: 13px; color: #aaa; margin-bottom: 30px; line-height: 1.5; }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid #333; color: #fff; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
-        .btn-acao { width: 100%; padding: 18px; border: none; border-radius: 8px; background: #d4af37; color: #000; font-weight: 900; font-size: 14px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Great+Vibes&display=swap');
 
-        /* Card Master Premium */
-        #cardExport { 
-            width: 100%; aspect-ratio: 9/16; 
-            background-image: url('https://i.postimg.cc/3JZfRnNr/file-0000000010fc720e8b2d698d8b712aad.png'); 
-            background-size: cover; background-position: center;
-            border: 6px solid #d4af37; border-radius: 20px; overflow: hidden; position: relative;
+        body { background: #050505; color: #fff; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; padding: 20px; }
+        .app-container { width: 100%; max-width: 400px; }
+
+        /* DESIGN DO TÍTULO 3D PREMIUM */
+        .titulo-3d {
+            font-size: 45px; line-height: 0.9; font-weight: 900; text-align: center;
+            background: linear-gradient(180deg, #fff 0%, #d1d1d1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 0 #888, 0 8px 10px rgba(0,0,0,0.5);
+            margin: 15px 0;
         }
-        .overlay { width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8)); display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 30px; box-sizing: border-box; }
-        .titulo-3d { font-weight: 900; font-size: 44px; color: #fff; text-align: center; line-height: 0.9; text-shadow: 0 4px 0 #d4af37, 0 8px 15px rgba(0,0,0,0.9); }
-        .foto-premium { width: 170px; height: 170px; border-radius: 50%; border: 6px solid #d4af37; box-shadow: 0 0 30px rgba(212,175,55,0.6); overflow: hidden; }
-        .foto-premium img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* MOLDURA FOTO */
+        .foto-container { 
+            width: 220px; height: 220px; border-radius: 20px; 
+            border: 6px solid #d4af37; overflow: hidden;
+            box-shadow: 0 0 30px rgba(212,175,55,0.4), inset 0 0 10px #000;
+        }
+
+        /* CARD FINAL */
+        #cardExport { 
+            width: 100%; aspect-ratio: 9/16; background-size: cover; 
+            border: 8px solid #d4af37; border-radius: 25px; overflow: hidden; 
+            background-image: url('https://i.postimg.cc/3JZfRnNr/file-0000000010fc720e8b2d698d8b712aad.png');
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- PÁGINA 1: FORMULÁRIO PROFISSIONAL -->
-        <div id="form-section" class="painel">
-            <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" width="100" style="margin-bottom:20px;">
-            <h3>EMISSÃO OFICIAL</h3>
-            <p>Bem-vindo ao sistema de credenciamento. Preencha seus dados abaixo para gerar sua identidade oficial como trilheiro.</p>
-            <input type="text" id="nome" placeholder="NOME COMPLETO">
-            <input type="text" id="ano" value="2026">
-            <input type="text" id="cidade" placeholder="CIDADE - ESTADO">
-            <input type="file" id="foto" accept="image/*">
-            <button class="btn-acao" onclick="gerar()">GERAR CREDENCIAL VIP</button>
+        <!-- ÁREA DO FORMULÁRIO -->
+        <div id="form-section" style="background:#111; padding:25px; border-radius:20px; border:1px solid #d4af37;">
+            <input type="text" id="nome" placeholder="NOME COMPLETO" style="width:100%; padding:15px; margin-bottom:10px;">
+            <input type="file" id="inputFoto" accept="image/*">
+            <div id="cropperArea" style="display:none; margin:15px 0;">
+                <img id="imageToCrop" style="max-width:100%;">
+                <button onclick="cortar()" style="width:100%; padding:10px; background:#d4af37;">CONFIRMAR CORTE</button>
+            </div>
+            <button onclick="gerar()" style="width:100%; padding:20px; background:#d4af37; font-weight:900; font-size:16px;">GERAR CREDENCIAL</button>
         </div>
 
-        <!-- PÁGINA 2: RESULTADO PREMIUM -->
+        <!-- RESULTADO MASTER -->
         <div id="result-section" style="display:none;">
             <div id="cardExport">
-                <div class="overlay">
-                    <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" width="120" style="filter:drop-shadow(0 0 10px rgba(212,175,55,0.5));" crossorigin="anonymous">
+                <div style="width:100%; height:100%; background:rgba(0,0,0,0.45); display:flex; flex-direction:column; align-items:center; padding:30px; box-sizing:border-box;">
+                    <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" width="140" style="filter:drop-shadow(0 0 10px #d4af37);">
                     <div class="titulo-3d">TRILHEIRO<br><span style="color:#d4af37;">OFICIAL</span></div>
-                    <div class="foto-premium"><img id="fotoPerfilRender"></div>
-                    <div id="nomeRender" style="font-size:38px; font-weight:900; text-shadow:0 2px 4px #000;"></div>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://instagram.com/trilheiros.roomt" width="90" style="border:3px solid #d4af37; border-radius:10px; background:#fff;" crossorigin="anonymous">
-                    <div style="font-family:'Great Vibes'; font-size:42px; text-shadow:0 2px 4px #000;">Jonatas Marruda</div>
-                    <div style="font-size:12px; font-weight:900; color:#d4af37; letter-spacing:3px; text-transform:uppercase;">Guia de Turismo • Fundador</div>
+                    <div class="foto-container" id="fotoFinal"></div>
+                    <div id="nomeRender" style="font-size:36px; font-weight:900; margin-top:15px;"></div>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://instagram.com/trilheiros.roomt" width="100" style="border:4px solid #d4af37; border-radius:10px; margin-top:15px;">
                 </div>
             </div>
-            <button class="btn-acao" style="background:#2e7d32; color:#fff; margin-top:20px;" onclick="baixar()">BAIXAR IMAGEM PREMIUM</button>
         </div>
     </div>
 
     <script>
+        let cropper;
+        document.getElementById('inputFoto').onchange = (e) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = document.getElementById('imageToCrop');
+                img.src = event.target.result;
+                document.getElementById('cropperArea').style.display = 'block';
+                if(cropper) cropper.destroy();
+                cropper = new Cropper(img, { aspectRatio: 1, viewMode: 1 });
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        };
+
+        function cortar() {
+            const canvas = cropper.getCroppedCanvas();
+            document.getElementById('fotoFinal').innerHTML = '';
+            document.getElementById('fotoFinal').appendChild(canvas);
+            document.getElementById('cropperArea').style.display = 'none';
+        }
+
         function gerar() {
             document.getElementById("nomeRender").textContent = document.getElementById("nome").value.toUpperCase();
-            const f = document.getElementById("foto").files[0];
-            if(f) document.getElementById("fotoPerfilRender").src = URL.createObjectURL(f);
             document.getElementById("form-section").style.display = "none";
             document.getElementById("result-section").style.display = "block";
-        }
-        function baixar() {
-            html2canvas(document.getElementById("cardExport"), {scale: 4, useCORS: true}).then(c => {
-                const a = document.createElement("a"); a.download = "Credencial_VIP.jpg"; a.href = c.toDataURL("image/jpeg", 1.0); a.click();
-            });
         }
     </script>
 </body>
 </html>
+
