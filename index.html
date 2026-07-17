@@ -4,68 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carteira Oficial | Trilheiros de Rondonópolis</title>
-    
-    <!-- Meta Tags SEO -->
-    <meta name="description" content="Gere sua carteira oficial personalizada dos Trilheiros de Rondonópolis.">
+    <meta name="description" content="Gerador oficial da Carteira dos Trilheiros de Rondonópolis - Edição Premium">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CropperJS -->
+    <!-- CropperJS CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     
-    <!-- Stylesheet -->
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo-wrapper">
+    <!-- Header Section -->
+    <header class="hero-header">
+        <div class="logo-container">
             <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Oficial" class="logo-principal">
         </div>
-        <h1>CARTEIRA OFICIAL<br><span>DOS</span><br>TRILHEIROS DE RONDONÓPOLIS</h1>
-        <p>Crie gratuitamente sua Carteira Oficial personalizada e compartilhe sua aventura.</p>
+        <div class="hero-content">
+            <h1>CARTEIRA OFICIAL<br><span>DOS TRILHEIROS DE RONDONÓPOLIS</span></h1>
+            <p>Crie gratuitamente sua Carteira Oficial personalizada e compartilhe sua aventura.</p>
+        </div>
     </header>
 
     <main id="app">
         <!-- Formulário Premium -->
         <section id="form-section" class="premium-card">
             <div class="form-group">
-                <label for="imageInput">📷 Foto do Trilheiro</label>
-                <p class="legend">Escolha uma foto onde seu rosto esteja totalmente visível.</p>
-                <input type="file" id="imageInput" accept="image/*">
-                <div id="cropper-container">
-                    <img id="imagePreview" alt="Pré-visualização">
+                <label for="imageInput"><i class="fas fa-camera"></i> Foto do Trilheiro</label>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" name="foto" accept="image/*" required autocomplete="off">
+                    <div class="upload-placeholder">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Clique ou arraste sua foto</p>
+                    </div>
+                    <div id="cropper-container">
+                        <img id="imagePreview" alt="Pré-visualização">
+                    </div>
                 </div>
+                <small>Escolha uma foto onde seu rosto esteja totalmente visível.</small>
             </div>
 
             <div class="form-group">
-                <label for="nomeInput">👤 Nome Completo</label>
-                <input type="text" id="nomeInput" placeholder="Digite seu nome completo">
+                <label for="nomeInput"><i class="fas fa-user"></i> Nome Completo</label>
+                <input type="text" id="nomeInput" name="nome" placeholder="Digite seu nome completo" required autocomplete="name">
             </div>
 
             <div class="form-group">
-                <label for="anoInput">🥾 Trilheiro desde</label>
-                <input type="number" id="anoInput" placeholder="Ex: 2026">
+                <label for="anoInput"><i class="fas fa-hiking"></i> Trilheiro desde</label>
+                <input type="number" id="anoInput" name="ano" placeholder="Ex: 2026" required autocomplete="off">
             </div>
 
             <div class="form-group">
-                <label for="cidadeInput">📍 Cidade</label>
-                <input type="text" id="cidadeInput" placeholder="Ex: Rondonópolis - MT">
+                <label for="cidadeInput"><i class="fas fa-map-marker-alt"></i> Cidade</label>
+                <input type="text" id="cidadeInput" name="cidade" placeholder="Ex: Rondonópolis - MT" required autocomplete="address-level2">
             </div>
 
             <button id="btnGerar" class="btn-premium">GERAR CARTEIRA OFICIAL</button>
         </section>
 
-        <!-- Tela Final -->
+        <!-- Tela da Carteira -->
         <section id="result-section" class="hidden">
-            <h2>Sua Carteira Oficial está pronta.</h2>
-            <div id="carteira-container" class="carteira-stories">
-                <!-- O JavaScript irá gerar o conteúdo da carteira aqui -->
+            <h2 class="result-title">Sua Carteira Oficial está pronta.</h2>
+            
+            <div id="carteira-container" class="carteira-canvas">
+                <div class="c-bg"></div>
+                
+                <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" alt="Logo" class="c-logo">
+                
+                <div class="c-title-wrapper">
+                    <span class="c-txt-trilheiro">TRILHEIRO</span>
+                    <span class="c-txt-oficial">OFICIAL</span>
+                </div>
+                
+                <div class="c-foto-wrapper">
+                    <img id="finalPhoto" src="" alt="Foto">
+                </div>
+                
+                <h3 id="finalNome">NOME DO TRILHEIRO</h3>
+                
+                <div class="c-painel-info">
+                    <div class="info-item"><span>🥾 Trilheiro desde:</span> <strong id="finalAno"></strong></div>
+                    <div class="info-item"><span>📍 Cidade:</span> <strong id="finalCidade"></strong></div>
+                    <div class="info-item"><span>🪪 Carteira Nº:</span> <strong>0001</strong></div>
+                    <div class="info-item"><span>📅 Emitido em:</span> <strong id="finalData"></strong></div>
+                </div>
+                
+                <div class="c-qrcode-area">
+                    <div id="qrcode"></div>
+                    <p>Instagram Oficial<br>@trilheiros.roomt</p>
+                </div>
+                
+                <div class="c-assinatura">
+                    <p>Jonatas Marruda</p>
+                    <span>Guia de Turismo</span>
+                    <span>Fundador dos Trilheiros de Rondonópolis</span>
+                </div>
+                
+                <div class="c-selos">
+                    <span class="selo-metálico">MEMBRO OFICIAL</span>
+                    <span class="selo-metálico">CREDENCIAL OFICIAL</span>
+                </div>
             </div>
+
             <div class="actions">
                 <button id="btnBaixar" class="btn-premium">BAIXAR STORIES</button>
                 <button id="btnNova" class="btn-premium secondary">GERAR NOVA CARTEIRA</button>
@@ -77,10 +122,12 @@
         <p>Comunidade Oficial dos Trilheiros de Rondonópolis.</p>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Scripts Externos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    
+    <!-- Script do Projeto -->
     <script src="script.js"></script>
 </body>
 </html>
