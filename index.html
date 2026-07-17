@@ -19,7 +19,8 @@
         .painel { background: rgba(20, 25, 22, 0.8); padding: 25px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
         .painel h3 { color: #d4af37; text-align: center; margin-top: 0; font-weight: 900; }
         .input-group { margin-bottom: 15px; text-align: left; }
-        .input-group label { display: block; font-size: 12px; font-weight: 600; color: #d4af37; margin-bottom: 5px; text-transform: uppercase; }
+        .input-group label { display: block; font-size: 13px; font-weight: 600; color: #d4af37; margin-bottom: 5px; text-transform: uppercase; }
+        .input-group .hint { font-size: 10px; color: #a3a3a3; margin-bottom: 8px; display: block; text-transform: none; }
         input { width: 100%; padding: 14px; margin: 0; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
         input[type="file"]::file-selector-button { background: #d4af37; color: #000; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-right: 10px; }
         
@@ -35,12 +36,11 @@
         /* ========================================= */
         .card-wrapper {
             width: 100%;
-            /* Proporção vertical perfeita */
             aspect-ratio: 9 / 16;
             margin: 0 auto 20px auto;
             position: relative;
-            background-color: #0c1f13; /* Fallback de cor */
-            background-image: url('fundo.jpg'); /* SUBA ESTA IMAGEM NO GITHUB */
+            background-color: #0c1f13; 
+            background-image: url('fundo.jpg'); /* Mantenha o fundo.jpg no GitHub */
             background-size: cover;
             background-position: center;
             border-radius: 20px;
@@ -48,30 +48,33 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
         }
 
-        /* Efeito de Vinheta (Bordas escuras) */
         .vinheta {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle, rgba(0,0,0,0) 30%, rgba(0,0,0,0.95) 100%);
             z-index: 1;
         }
 
-        /* Conteúdo do Crachá */
         .card-content {
             position: relative; z-index: 2; padding: 25px; height: 100%; box-sizing: border-box;
             display: flex; flex-direction: column; align-items: center; justify-content: space-between;
         }
 
-        /* Topo: Logo e Título */
+        /* Topo: Logo e Título com novo 3D à prova de bugs */
         .topo { text-align: center; width: 100%; }
-        .logo { width: 110px; margin-bottom: 10px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.8)); }
+        .logo { width: 120px; margin-bottom: 5px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.8)); }
         
         .titulo-3d {
-            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 34px; line-height: 1.1;
+            font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 38px; line-height: 1.05;
             margin: 0;
-            background: linear-gradient(to bottom, #fff5c0, #d4af37);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            /* Simulação de 3D Extrusão no CSS */
-            filter: drop-shadow(0px 2px 0px #8a660d) drop-shadow(0px 4px 10px rgba(0,0,0,0.8));
+            color: #fceea7; /* Cor sólida clara (Luz) */
+            /* Empilhamento de sombras para simular 3D metálico perfeitamente no html2canvas */
+            text-shadow: 
+                0 1px 0 #d4af37,
+                0 2px 0 #c49d27,
+                0 3px 0 #b38e20,
+                0 4px 0 #a37f19,
+                0 5px 0 #8c6c13,
+                0 6px 15px rgba(0,0,0, 0.9);
         }
 
         /* Foto de Perfil com Borda Dupla Glow */
@@ -119,22 +122,27 @@
         <h3>GERAR CREDENCIAL</h3>
         
         <div class="input-group">
-            <label>Nome Completo</label>
+            <label>Seu Nome Completo</label>
+            <span class="hint">Como você quer ser chamado na carteirinha?</span>
             <input type="text" id="nome" placeholder="Ex: Jonatas Marruda">
         </div>
         
         <div class="input-group">
             <label>Membro Desde</label>
+            <span class="hint">Qual ano você começou a trilhar?</span>
             <input type="text" id="ano" value="2026">
         </div>
         
         <div class="input-group">
-            <label>Cidade / Expedição</label>
-            <input type="text" id="cidade" value="Rondonópolis-MT">
+            <label>De qual Cidade/Estado você é?</label>
+            <span class="hint">Deixe em branco se preferir.</span>
+            <!-- Valor agora começa vazio e o placeholder instrui o usuário -->
+            <input type="text" id="cidade" placeholder="Ex: Rondonópolis - MT">
         </div>
         
         <div class="input-group">
-            <label>Sua Foto</label>
+            <label>Escolha Sua Melhor Foto</label>
+            <span class="hint">Selecione uma foto do seu rosto para o perfil.</span>
             <input type="file" id="foto" accept="image/*">
         </div>
         
@@ -151,7 +159,8 @@
             <div class="card-content">
                 <!-- Topo -->
                 <div class="topo">
-                    <img class="logo" src="logo.png" alt="" onerror="this.style.display='none'">
+                    <!-- Logo direto da URL com permissão crossorigin -->
+                    <img class="logo" src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" crossorigin="anonymous" alt="Logo">
                     <h2 class="titulo-3d">TRILHEIRO<br>OFICIAL</h2>
                 </div>
 
@@ -178,7 +187,7 @@
                     </div>
                     <div class="info-box">
                         <div class="info-label">📍 Local</div>
-                        <div class="info-value" id="cidadeRender">RONDONÓPOLIS-MT</div>
+                        <div class="info-value" id="cidadeRender">-</div>
                     </div>
                     <div class="info-box">
                         <div class="info-label">📅 Emissão</div>
@@ -188,7 +197,6 @@
 
                 <!-- Base (QR Code e Assinatura) -->
                 <div class="base-card">
-                    <!-- A API do QR Code -->
                     <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://instagram.com/trilheiros.roomt" crossorigin="anonymous">
                     <div class="arroba">@trilheiros.roomt</div>
                     
@@ -206,10 +214,8 @@
 </div>
 
 <script>
-    // Variável para armazenar a foto carregada[cite: 1]
     let fotoCarregada = null;
 
-    // Pré-carrega a foto quando selecionada[cite: 1]
     document.getElementById("foto").addEventListener("change", e => {
         const file = e.target.files[0];
         if (!file) return;
@@ -217,16 +223,20 @@
     });
 
     function gerarArte() {
-        const nomeInput = document.getElementById("nome").value.trim() || "Jonatas Marruda";
+        const nomeInput = document.getElementById("nome").value.trim() || "TRILHEIRO";
         
-        // Separa Nome e Sobrenome[cite: 1]
+        // Separa Nome e Sobrenome
         const partesNome = nomeInput.split(" ");
         document.getElementById("nomeRender").textContent = partesNome.shift().toUpperCase();
         document.getElementById("sobrenomeRender").textContent = partesNome.join(" ").toUpperCase();
         
-        // Alimenta a grade[cite: 1]
+        // Alimenta a grade
         document.getElementById("anoRender").textContent = document.getElementById("ano").value;
-        document.getElementById("cidadeRender").textContent = document.getElementById("cidade").value.toUpperCase();
+        
+        // Se a pessoa deixar a cidade em branco, coloca "NÃO INFORMADO"
+        const cidadeValor = document.getElementById("cidade").value.trim();
+        document.getElementById("cidadeRender").textContent = cidadeValor ? cidadeValor.toUpperCase() : "NÃO INFORMADO";
+        
         document.getElementById("carteiraRender").textContent = "TR-" + Math.floor(Math.random() * 900 + 100);
         document.getElementById("dataRender").textContent = new Date().toLocaleDateString("pt-BR");
 
@@ -245,7 +255,6 @@
         document.getElementById("form-section").style.display = "block";
     }
 
-    // Exportação profissional usando html2canvas[cite: 1]
     function baixarArte() {
         const btn = document.querySelector('.btn-baixar');
         btn.textContent = "GERANDO...";
@@ -253,10 +262,10 @@
         const card = document.getElementById("cardExport");
         
         html2canvas(card, {
-            scale: 3,             // Escala x3 para qualidade Full HD[cite: 1]
-            useCORS: true,        // Permite salvar imagens de links externos (como o QR Code)
+            scale: 3,             
+            useCORS: true,        
             allowTaint: false,
-            backgroundColor: null // Mantém as bordas arredondadas intactas
+            backgroundColor: null 
         }).then(canvas => {
             const a = document.createElement("a");
             a.download = "Credencial-Trilheiro.jpg";
@@ -264,7 +273,7 @@
             a.click();
             btn.textContent = "BAIXAR IMAGEM EM ALTA";
         }).catch(err => {
-            alert("Erro ao gerar a imagem. Verifique se as imagens de fundo estão no GitHub.");
+            alert("Erro ao gerar a imagem.");
             btn.textContent = "BAIXAR IMAGEM EM ALTA";
         });
     }
