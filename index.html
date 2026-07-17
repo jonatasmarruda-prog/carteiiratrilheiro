@@ -1,96 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Credencial VIP Trilheiros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteira Oficial | Trilheiros de Rondonópolis</title>
+    
+    <!-- Meta Tags SEO -->
+    <meta name="description" content="Gere sua carteira oficial personalizada dos Trilheiros de Rondonópolis.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CropperJS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Great+Vibes&display=swap');
-
-        body { background: #050505; color: #fff; font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .app-container { width: 100%; max-width: 400px; }
-
-        /* DESIGN DO TÍTULO 3D PREMIUM */
-        .titulo-3d {
-            font-size: 45px; line-height: 0.9; font-weight: 900; text-align: center;
-            background: linear-gradient(180deg, #fff 0%, #d1d1d1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 4px 0 #888, 0 8px 10px rgba(0,0,0,0.5);
-            margin: 15px 0;
-        }
-
-        /* MOLDURA FOTO */
-        .foto-container { 
-            width: 220px; height: 220px; border-radius: 20px; 
-            border: 6px solid #d4af37; overflow: hidden;
-            box-shadow: 0 0 30px rgba(212,175,55,0.4), inset 0 0 10px #000;
-        }
-
-        /* CARD FINAL */
-        #cardExport { 
-            width: 100%; aspect-ratio: 9/16; background-size: cover; 
-            border: 8px solid #d4af37; border-radius: 25px; overflow: hidden; 
-            background-image: url('https://i.postimg.cc/3JZfRnNr/file-0000000010fc720e8b2d698d8b712aad.png');
-        }
-    </style>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- ÁREA DO FORMULÁRIO -->
-        <div id="form-section" style="background:#111; padding:25px; border-radius:20px; border:1px solid #d4af37;">
-            <input type="text" id="nome" placeholder="NOME COMPLETO" style="width:100%; padding:15px; margin-bottom:10px;">
-            <input type="file" id="inputFoto" accept="image/*">
-            <div id="cropperArea" style="display:none; margin:15px 0;">
-                <img id="imageToCrop" style="max-width:100%;">
-                <button onclick="cortar()" style="width:100%; padding:10px; background:#d4af37;">CONFIRMAR CORTE</button>
-            </div>
-            <button onclick="gerar()" style="width:100%; padding:20px; background:#d4af37; font-weight:900; font-size:16px;">GERAR CREDENCIAL</button>
-        </div>
 
-        <!-- RESULTADO MASTER -->
-        <div id="result-section" style="display:none;">
-            <div id="cardExport">
-                <div style="width:100%; height:100%; background:rgba(0,0,0,0.45); display:flex; flex-direction:column; align-items:center; padding:30px; box-sizing:border-box;">
-                    <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" width="140" style="filter:drop-shadow(0 0 10px #d4af37);">
-                    <div class="titulo-3d">TRILHEIRO<br><span style="color:#d4af37;">OFICIAL</span></div>
-                    <div class="foto-container" id="fotoFinal"></div>
-                    <div id="nomeRender" style="font-size:36px; font-weight:900; margin-top:15px;"></div>
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://instagram.com/trilheiros.roomt" width="100" style="border:4px solid #d4af37; border-radius:10px; margin-top:15px;">
+    <header>
+        <div class="logo-wrapper">
+            <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Oficial" class="logo-principal">
+        </div>
+        <h1>CARTEIRA OFICIAL<br><span>DOS</span><br>TRILHEIROS DE RONDONÓPOLIS</h1>
+        <p>Crie gratuitamente sua Carteira Oficial personalizada e compartilhe sua aventura.</p>
+    </header>
+
+    <main id="app">
+        <!-- Formulário Premium -->
+        <section id="form-section" class="premium-card">
+            <div class="form-group">
+                <label for="imageInput">📷 Foto do Trilheiro</label>
+                <p class="legend">Escolha uma foto onde seu rosto esteja totalmente visível.</p>
+                <input type="file" id="imageInput" accept="image/*">
+                <div id="cropper-container">
+                    <img id="imagePreview" alt="Pré-visualização">
                 </div>
             </div>
-        </div>
-    </div>
 
-    <script>
-        let cropper;
-        document.getElementById('inputFoto').onchange = (e) => {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const img = document.getElementById('imageToCrop');
-                img.src = event.target.result;
-                document.getElementById('cropperArea').style.display = 'block';
-                if(cropper) cropper.destroy();
-                cropper = new Cropper(img, { aspectRatio: 1, viewMode: 1 });
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        };
+            <div class="form-group">
+                <label for="nomeInput">👤 Nome Completo</label>
+                <input type="text" id="nomeInput" placeholder="Digite seu nome completo">
+            </div>
 
-        function cortar() {
-            const canvas = cropper.getCroppedCanvas();
-            document.getElementById('fotoFinal').innerHTML = '';
-            document.getElementById('fotoFinal').appendChild(canvas);
-            document.getElementById('cropperArea').style.display = 'none';
-        }
+            <div class="form-group">
+                <label for="anoInput">🥾 Trilheiro desde</label>
+                <input type="number" id="anoInput" placeholder="Ex: 2026">
+            </div>
 
-        function gerar() {
-            document.getElementById("nomeRender").textContent = document.getElementById("nome").value.toUpperCase();
-            document.getElementById("form-section").style.display = "none";
-            document.getElementById("result-section").style.display = "block";
-        }
-    </script>
+            <div class="form-group">
+                <label for="cidadeInput">📍 Cidade</label>
+                <input type="text" id="cidadeInput" placeholder="Ex: Rondonópolis - MT">
+            </div>
+
+            <button id="btnGerar" class="btn-premium">GERAR CARTEIRA OFICIAL</button>
+        </section>
+
+        <!-- Tela Final -->
+        <section id="result-section" class="hidden">
+            <h2>Sua Carteira Oficial está pronta.</h2>
+            <div id="carteira-container" class="carteira-stories">
+                <!-- O JavaScript irá gerar o conteúdo da carteira aqui -->
+            </div>
+            <div class="actions">
+                <button id="btnBaixar" class="btn-premium">BAIXAR STORIES</button>
+                <button id="btnNova" class="btn-premium secondary">GERAR NOVA CARTEIRA</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Comunidade Oficial dos Trilheiros de Rondonópolis.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
