@@ -30,6 +30,7 @@
             border: 1px solid #333;
             background: #2a2a2a;
             color: white;
+            box-sizing: border-box;
         }
         button {
             background-color: #4CAF50;
@@ -47,10 +48,10 @@
         #canvas-container {
             margin-top: 20px;
             width: 100%;
-            display: none; /* Escondido até gerar */
+            display: none;
         }
         canvas {
-            width: 100%; /* Mostra pequeno na tela */
+            width: 100%;
             max-width: 300px;
             border-radius: 10px;
             border: 2px solid #4CAF50;
@@ -73,111 +74,127 @@
     <label style="display:block; margin-top:10px; text-align:left; margin-left:5%;">Sua foto de perfil:</label>
     <input type="file" id="fotoInput" accept="image/*">
 
-    <button onclick="gerarCracha()">1. Gerar Meu Crachá</button>
+    <button id="gerarBtn" onclick="gerarCracha()">1. Gerar Meu Crachá</button>
 
     <div id="canvas-container">
         <canvas id="crachaCanvas" width="1080" height="1920"></canvas>
     </div>
 
-    <button id="downloadBtn" onclick="baixarCracha()">2. Baixar Imagem para o Instagram</button>
+    <button id="downloadBtn" onclick="baixarCracha()">2. Baixar Imagem</button>
 </div>
 
 <script>
-    function gerarCracha() {
-        const canvas = document.getElementById('crachaCanvas');
-        const ctx = canvas.getContext('2d');
-        const nome = document.getElementById('nomeInput').value || 'Nome do Trilheiro';
-        const ano = document.getElementById('anoInput').value || '2024';
-        const fotoInput = document.getElementById('fotoInput').files[0];
+    // Função auxiliar para carregar imagens sem travar o código
+    async function carregarImagem(url) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = () => resolve(null); // Se der erro, retorna nulo e não trava
+            img.src = url;
+        });
+    }
 
-        // 1. Carregar imagem de fundo (precisa estar no mesmo local do index.html)
-        const bgImg = new Image();
-        bgImg.src = 'fundo.jpg'; // O NOME DA SUA IMAGEM DE FUNDO
-        bgImg.onload = function() {
-            // Desenha o fundo
-            ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+    async function gerarCracha() {
+        const btn = document.getElementById('gerarBtn');
+        btn.innerText = "Gerando aguarde...";
+        
+        try {
+            const canvas = document.getElementById('crachaCanvas');
+            const ctx = canvas.getContext('2d');
+            const nome = document.getElementById('nomeInput').value || 'Nome do Trilheiro';
+            const ano = document.getElementById('anoInput').value || '2026';
+            const fotoInput = document.getElementById('fotoInput').files[0];
 
-            // Desenha um retângulo escuro transparente para dar leitura no texto
+            // Limpa o desenho anterior
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Fundo
+            const bgImg = await carregarImagem('fundo.jpg');
+            if (bgImg) {
+                ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.fillStyle = "#1e3d23"; // Cor verde escuro provisória
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                alert("Atenção: A imagem 'fundo.jpg' não foi encontrada no GitHub. Foi usado um fundo provisório.");
+            }
+
+            // Quadrado escuro para os textos
             ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
             ctx.fillRect(100, 400, 880, 1100); 
 
-            // Textos Fixos
+            // Textos
             ctx.textAlign = "center";
-            ctx.fillStyle = "#4CAF50"; // Verde trilha
+            ctx.fillStyle = "#4CAF50"; 
             ctx.font = "bold 80px Arial";
             ctx.fillText("TRILHEIRO OFICIAL", canvas.width / 2, 530);
 
-            // Nome do Usuário
             ctx.fillStyle = "#FFFFFF";
             ctx.font = "bold 90px Arial";
             ctx.fillText(nome.toUpperCase(), canvas.width / 2, 1100);
 
-            // Membro desde
             ctx.fillStyle = "#AAAAAA";
             ctx.font = "50px Arial";
             ctx.fillText("Membro desde: " + ano, canvas.width / 2, 1180);
 
-            // Seu Instagram (Marketing)
             ctx.fillStyle = "#FFFFFF";
             ctx.font = "bold 45px Arial";
             ctx.fillText("@trilheros.roomt", canvas.width / 2, 1420);
 
-            // 2. Carregar e desenhar o QR Code
-            const qrImg = new Image();
-            qrImg.src = 'qr.png'; // O NOME DO SEU QR CODE
-            qrImg.onload = function() {
+            // 2. QR Code
+            const qrImg = await carregarImagem('qr.png');
+            if (qrImg) {
                 ctx.drawImage(qrImg, (canvas.width / 2) - 150, 1500, 300, 300);
-            };
-
-            // 3. Carregar e desenhar a foto do usuário num círculo
-            if (fotoInput) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const userImg = new Image();
-                    userImg.src = event.target.result;
-                    userImg.onload = function() {
-                        const centerX = canvas.width / 2;
-                        const centerY = 780;
-                        const radius = 200;
-
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-                        ctx.closePath();
-                        ctx.clip();
-                        
-                        // Faz a imagem preencher o círculo
-                        ctx.drawImage(userImg, centerX - radius, centerY - radius, radius * 2, radius * 2);
-                        ctx.restore();
-                        
-                        // Borda na foto
-                        ctx.beginPath();
-                        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-                        ctx.lineWidth = 15;
-                        ctx.strokeStyle = "#4CAF50";
-                        ctx.stroke();
-
-                        mostrarResultado();
-                    }
-                }
-                reader.readAsDataURL(fotoInput);
             } else {
-                mostrarResultado(); // Se não botar foto, gera sem foto
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect((canvas.width / 2) - 150, 1500, 300, 300);
+                ctx.fillStyle = "#000000";
+                ctx.font = "30px Arial";
+                ctx.fillText("Sem QR Code", canvas.width / 2, 1650);
             }
-        };
-    }
 
-    function mostrarResultado() {
-        document.getElementById('canvas-container').style.display = 'block';
-        document.getElementById('downloadBtn').style.display = 'block';
+            // 3. Foto de Perfil
+            if (fotoInput) {
+                const imgUrl = URL.createObjectURL(fotoInput);
+                const userImg = await carregarImagem(imgUrl);
+                
+                if (userImg) {
+                    const centerX = canvas.width / 2;
+                    const centerY = 780;
+                    const radius = 200;
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+                    ctx.closePath();
+                    ctx.clip();
+                    
+                    ctx.drawImage(userImg, centerX - radius, centerY - radius, radius * 2, radius * 2);
+                    ctx.restore();
+                    
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+                    ctx.lineWidth = 15;
+                    ctx.strokeStyle = "#4CAF50";
+                    ctx.stroke();
+                }
+            }
+
+            // Mostra o resultado na tela
+            document.getElementById('canvas-container').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'block';
+
+        } catch (erro) {
+            alert("Erro inesperado: " + erro.message);
+        } finally {
+            btn.innerText = "1. Gerar Meu Crachá";
+        }
     }
 
     function baixarCracha() {
         const canvas = document.getElementById('crachaCanvas');
-        const dataURL = canvas.toDataURL("image/jpeg", 0.9);
         const link = document.createElement('a');
-        link.download = 'meu-cracha-trilheiro.jpg';
-        link.href = dataURL;
+        link.download = 'cracha-trilheiro.jpg';
+        link.href = canvas.toDataURL("image/jpeg", 0.9);
         link.click();
     }
 </script>
