@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Crachá - Trilheiro Oficial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        h1 { color: #4CAF50; }
+        input[type="text"], input[type="file"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: white;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        button:hover { background-color: #45a049; }
+        #canvas-container {
+            margin-top: 20px;
+            width: 100%;
+            display: none; /* Escondido até gerar */
+        }
+        canvas {
+            width: 100%; /* Mostra pequeno na tela */
+            max-width: 300px;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+        }
+        #downloadBtn {
+            background-color: #2196F3;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Crachá do Trilheiro</h1>
+    <p>Gere seu crachá oficial para os Stories!</p>
+
+    <input type="text" id="nomeInput" placeholder="Seu Nome (Ex: João Silva)" maxlength="20">
+    <input type="text" id="anoInput" placeholder="Trilheiro desde (Ex: 2021)" maxlength="4">
+    
+    <label style="display:block; margin-top:10px; text-align:left; margin-left:5%;">Sua foto de perfil:</label>
+    <input type="file" id="fotoInput" accept="image/*">
+
+    <button onclick="gerarCracha()">1. Gerar Meu Crachá</button>
+
+    <div id="canvas-container">
+        <canvas id="crachaCanvas" width="1080" height="1920"></canvas>
+    </div>
+
+    <button id="downloadBtn" onclick="baixarCracha()">2. Baixar Imagem para o Instagram</button>
+</div>
+
+<script>
+    function gerarCracha() {
+        const canvas = document.getElementById('crachaCanvas');
+        const ctx = canvas.getContext('2d');
+        const nome = document.getElementById('nomeInput').value || 'Nome do Trilheiro';
+        const ano = document.getElementById('anoInput').value || '2024';
+        const fotoInput = document.getElementById('fotoInput').files[0];
+
+        // 1. Carregar imagem de fundo (precisa estar no mesmo local do index.html)
+        const bgImg = new Image();
+        bgImg.src = 'fundo.jpg'; // O NOME DA SUA IMAGEM DE FUNDO
+        bgImg.onload = function() {
+            // Desenha o fundo
+            ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+
+            // Desenha um retângulo escuro transparente para dar leitura no texto
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+            ctx.fillRect(100, 400, 880, 1100); 
+
+            // Textos Fixos
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#4CAF50"; // Verde trilha
+            ctx.font = "bold 80px Arial";
+            ctx.fillText("TRILHEIRO OFICIAL", canvas.width / 2, 530);
+
+            // Nome do Usuário
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "bold 90px Arial";
+            ctx.fillText(nome.toUpperCase(), canvas.width / 2, 1100);
+
+            // Membro desde
+            ctx.fillStyle = "#AAAAAA";
+            ctx.font = "50px Arial";
+            ctx.fillText("Membro desde: " + ano, canvas.width / 2, 1180);
+
+            // Seu Instagram (Marketing)
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "bold 45px Arial";
+            ctx.fillText("@trilheros.roomt", canvas.width / 2, 1420);
+
+            // 2. Carregar e desenhar o QR Code
+            const qrImg = new Image();
+            qrImg.src = 'qr.png'; // O NOME DO SEU QR CODE
+            qrImg.onload = function() {
+                ctx.drawImage(qrImg, (canvas.width / 2) - 150, 1500, 300, 300);
+            };
+
+            // 3. Carregar e desenhar a foto do usuário num círculo
+            if (fotoInput) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const userImg = new Image();
+                    userImg.src = event.target.result;
+                    userImg.onload = function() {
+                        const centerX = canvas.width / 2;
+                        const centerY = 780;
+                        const radius = 200;
+
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+                        ctx.closePath();
+                        ctx.clip();
+                        
+                        // Faz a imagem preencher o círculo
+                        ctx.drawImage(userImg, centerX - radius, centerY - radius, radius * 2, radius * 2);
+                        ctx.restore();
+                        
+                        // Borda na foto
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+                        ctx.lineWidth = 15;
+                        ctx.strokeStyle = "#4CAF50";
+                        ctx.stroke();
+
+                        mostrarResultado();
+                    }
+                }
+                reader.readAsDataURL(fotoInput);
+            } else {
+                mostrarResultado(); // Se não botar foto, gera sem foto
+            }
+        };
+    }
+
+    function mostrarResultado() {
+        document.getElementById('canvas-container').style.display = 'block';
+        document.getElementById('downloadBtn').style.display = 'block';
+    }
+
+    function baixarCracha() {
+        const canvas = document.getElementById('crachaCanvas');
+        const dataURL = canvas.toDataURL("image/jpeg", 0.9);
+        const link = document.createElement('a');
+        link.download = 'meu-cracha-trilheiro.jpg';
+        link.href = dataURL;
+        link.click();
+    }
+</script>
+
+</body>
+</html>
