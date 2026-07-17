@@ -1,320 +1,752 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credencial VIP - Trilheiros de Rondonópolis</title>
-    <!-- Fontes Premium -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Great+Vibes&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #050a07 0%, #111a14 100%);
-            color: #ffffff;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 420px;
-            background: rgba(20, 25, 22, 0.75);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 40px 30px;
-            border-radius: 24px;
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(212, 175, 55, 0.05);
-            box-sizing: border-box;
-        }
-        .logo-form {
-            width: 130px;
-            margin: 0 auto 20px auto;
-            display: block;
-            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
-        }
-        h1 { 
-            color: #d4af37; font-weight: 900; font-size: 26px; margin-bottom: 5px; text-transform: uppercase;
-        }
-        p { color: #b3b3b3; font-size: 13px; margin-bottom: 35px; }
-        .input-group { text-align: left; margin-bottom: 22px; }
-        .input-group label {
-            display: block; font-size: 12px; font-weight: 600; color: #d4af37; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
-        }
-        input[type="text"], input[type="file"] {
-            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.4); color: white; box-sizing: border-box; font-size: 15px; font-family: 'Montserrat', sans-serif; transition: 0.3s;
-        }
-        input[type="text"]:focus { border-color: #d4af37; outline: none; }
-        input[type="file"]::file-selector-button {
-            background: linear-gradient(135deg, #333, #222); color: #d4af37; border: 1px solid rgba(212, 175, 55, 0.5); padding: 10px 15px; border-radius: 8px; cursor: pointer; margin-right: 15px; font-weight: 600;
-        }
-        button { border: none; border-radius: 12px; cursor: pointer; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        #gerarBtn {
-            background: linear-gradient(135deg, #d4af37 0%, #aa8529 100%); color: #0a0a0a; padding: 18px 20px; width: 100%; font-size: 16px; margin-top: 15px; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-        }
-        #gerarBtn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5); }
-        #action-buttons { display: none; gap: 15px; margin-top: 25px; width: 100%; }
-        #action-buttons button { flex: 1; padding: 16px 10px; font-size: 13px; }
-        #downloadBtn { background: linear-gradient(135deg, #2e7d32, #1b5e20); color: white; }
-        #voltarBtn { background: rgba(255, 255, 255, 0.05); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); }
-        #canvas-container { margin-top: 20px; width: 100%; display: none; }
-        canvas { width: 100%; max-width: 340px; border-radius: 16px; border: 2px solid rgba(212, 175, 55, 0.6); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Carteira Oficial dos Trilheiros</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Cinzel:wght@700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:
+linear-gradient(180deg,#06110b,#0b1d14,#06110b);
+
+font-family:Montserrat,sans-serif;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+padding:40px;
+
+}
+
+/* =========================== */
+
+.container{
+
+width:430px;
+
+background:#111;
+
+border-radius:28px;
+
+overflow:hidden;
+
+position:relative;
+
+box-shadow:
+
+0 25px 80px rgba(0,0,0,.75),
+
+0 0 80px rgba(212,175,55,.18);
+
+}
+
+/* =========================== */
+
+.card{
+
+position:relative;
+
+padding:30px;
+
+background:
+
+linear-gradient(180deg,#1a261f,#0d1712);
+
+overflow:hidden;
+
+}
+
+/* textura */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+
+radial-gradient(circle at 20% 20%,rgba(255,255,255,.05),transparent 35%),
+
+radial-gradient(circle at 80% 15%,rgba(212,175,55,.08),transparent 40%),
+
+radial-gradient(circle at 50% 80%,rgba(255,255,255,.04),transparent 40%);
+
+pointer-events:none;
+
+}
+
+/* borda */
+
+.card::after{
+
+content:"";
+
+position:absolute;
+
+left:14px;
+
+top:14px;
+
+right:14px;
+
+bottom:14px;
+
+border-radius:22px;
+
+border:2px solid rgba(212,175,55,.45);
+
+box-shadow:
+
+inset 0 0 20px rgba(255,255,255,.03);
+
+}
+
+/* =========================== */
+
+.logo{
+
+width:130px;
+
+display:block;
+
+margin:auto;
+
+filter:
+
+drop-shadow(0 10px 12px rgba(0,0,0,.7));
+
+position:relative;
+
+z-index:2;
+
+}
+
+/* =========================== */
+
+.topo{
+
+text-align:center;
+
+margin-top:10px;
+
+color:#d4af37;
+
+letter-spacing:4px;
+
+font-size:13px;
+
+font-weight:700;
+
+}
+
+/* =========================== */
+
+.titulo{
+
+margin-top:18px;
+
+text-align:center;
+
+font-family:Cinzel;
+
+font-weight:900;
+
+font-size:66px;
+
+line-height:62px;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#fff7d1,
+
+#ffe082,
+
+#d4af37,
+
+#8f6a0d);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+
+0 3px 0 #705400,
+
+0 6px 0 #4d3800,
+
+0 10px 18px rgba(0,0,0,.65);
+
+position:relative;
+
+z-index:2;
+
+}
+
+/* =========================== */
+
+.foto{
+
+width:250px;
+
+height:250px;
+
+margin:28px auto;
+
+border-radius:50%;
+
+overflow:hidden;
+
+position:relative;
+
+border:7px solid #d4af37;
+
+box-shadow:
+
+0 0 0 4px rgba(255,245,180,.35),
+
+0 0 40px rgba(212,175,55,.8),
+
+0 0 80px rgba(212,175,55,.35);
+
+}
+
+.foto img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+/* =========================== */
+
+.nome{
+
+text-align:center;
+
+font-size:48px;
+
+font-weight:900;
+
+color:white;
+
+letter-spacing:2px;
+
+text-shadow:
+
+0 3px 10px black;
+
+}
+
+.sobrenome{
+
+text-align:center;
+
+font-size:24px;
+
+font-weight:700;
+
+color:#d4af37;
+
+margin-bottom:30px;
+
+}
+
+/* =========================== */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:12px;
+
+}
+
+.info{
+
+background:rgba(0,0,0,.45);
+
+border:1px solid rgba(212,175,55,.28);
+
+border-radius:14px;
+
+padding:14px;
+
+backdrop-filter:blur(5px);
+
+}
+
+.info h4{
+
+font-size:12px;
+
+color:#caa53d;
+
+margin-bottom:6px;
+
+letter-spacing:1px;
+
+}
+
+.info p{
+
+font-size:19px;
+
+font-weight:800;
+
+color:white;
+
+}
+
+/* =========================== */
+
+.qr{
+
+margin:35px auto 10px;
+
+width:170px;
+
+height:170px;
+
+background:white;
+
+border-radius:18px;
+
+border:6px solid #d4af37;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+box-shadow:
+
+0 0 25px rgba(212,175,55,.4);
+
+}
+
+/* =========================== */
+
+.instagram{
+
+text-align:center;
+
+font-weight:700;
+
+color:white;
+
+margin-top:12px;
+
+}
+
+.assinatura{
+
+margin-top:30px;
+
+font-family:Great Vibes;
+
+font-size:55px;
+
+text-align:center;
+
+color:white;
+
+}
+
+.cargo{
+
+text-align:center;
+
+margin-top:6px;
+
+font-size:13px;
+
+color:#d4af37;
+
+letter-spacing:2px;
+
+font-weight:700;
+
+}
+
+</style>
+
 </head>
+
 <body>
 
 <div class="container">
-    <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros" class="logo-form">
-    <h1>CREDENCIAL VIP</h1>
-    
-    <div id="form-container">
-        <p>Preencha os dados do trilheiro abaixo</p>
-        <div class="input-group">
-            <label>Nome do Trilheiro</label>
-            <input type="text" id="nomeInput" placeholder="Ex: Jonatas Marruda" maxlength="20">
-        </div>
-        <div class="input-group">
-            <label>Membro Desde (Ano)</label>
-            <input type="text" id="anoInput" placeholder="Ex: 2026" maxlength="4">
-        </div>
-        <div class="input-group">
-            <label>Cidade - Estado</label>
-            <input type="text" id="cidadeInput" value="Rondonópolis - MT" maxlength="25">
-        </div>
-        <div class="input-group">
-            <label>Foto de Perfil</label>
-            <input type="file" id="fotoInput" accept="image/*">
-        </div>
-        <button id="gerarBtn" onclick="gerarCracha()">1. Forjar Credencial Premium</button>
-    </div>
 
-    <div id="canvas-container">
-        <canvas id="crachaCanvas" width="1080" height="1920"></canvas>
-    </div>
-    <div id="action-buttons">
-        <button id="downloadBtn" onclick="baixarCracha()">Baixar Arte</button>
-        <button id="voltarBtn" onclick="voltarInicio()">Voltar ao Início</button>
-    </div>
+<div class="card">
+
+<img class="logo"
+src="logo.png">
+
+<div class="topo">
+
+MEMBRO OFICIAL • MATO GROSSO
+
 </div>
 
-<script>
-    async function carregarImagem(url) {
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.crossOrigin = "anonymous"; 
-            img.onload = () => resolve(img);
-            img.onerror = () => resolve(null);
-            img.src = url;
-        });
-    }
+<div class="titulo">
 
-    document.fonts.load("100px 'Great Vibes'").then(() => console.log('Fontes OK'));
-    document.fonts.load("900 130px 'Montserrat'").then(() => console.log('Fontes OK'));
+TRILHEIRO
 
-    // Função para gerar número aleatório tipo TR-084
-    function gerarCarteira() {
-        return "TR-" + Math.floor(Math.random() * 900 + 100);
-    }
+<br>
 
-    // Função para pegar data atual
-    function obterDataEmissao() {
-        const hoje = new Date();
-        return ("0" + hoje.getDate()).slice(-2) + "/" + ("0" + (hoje.getMonth() + 1)).slice(-2) + "/" + hoje.getFullYear();
-    }
+OFICIAL
 
-    // Função para desenhar Texto 3D Real (Extrusão)
-    function draw3DText(ctx, text, x, y, font, colorTop, colorSide, depth) {
-        ctx.font = font;
-        ctx.textAlign = "center";
-        // Desenha a extrusão (camadas de sombra profundas)
-        ctx.fillStyle = colorSide;
-        for (let i = depth; i > 0; i--) {
-            ctx.fillText(text, x, y + i);
-        }
-        // Desenha a face do texto
-        ctx.fillStyle = colorTop;
-        ctx.fillText(text, x, y);
-    }
+</div>
 
-    async function gerarCracha() {
-        const btn = document.getElementById('gerarBtn');
-        btn.innerText = "Forjando Arte Premium...";
-        
-        try {
-            const canvas = document.getElementById('crachaCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            const nomeRaw = document.getElementById('nomeInput').value || 'Jonatas Marruda';
-            const ano = document.getElementById('anoInput').value || '2026';
-            const cidade = document.getElementById('cidadeInput').value || 'Rondonópolis - MT';
-            const fotoInput = document.getElementById('fotoInput').files[0];
-            const numCarteira = gerarCarteira();
-            const dataEmissao = obterDataEmissao();
+<div class="foto">
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+<img id="fotoPerfil">
 
-            // 1. FUNDO PREMIUM
-            const bgImg = await carregarImagem('fundo.jpg');
-            if (bgImg) {
-                ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-                // Vinheta Cinematográfica
-                const vinheta = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 200, canvas.width/2, canvas.height/2, 1200);
-                vinheta.addColorStop(0, 'rgba(0,0,0,0)');
-                vinheta.addColorStop(1, 'rgba(0,0,0,0.8)');
-                ctx.fillStyle = vinheta;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            } else {
-                const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-                grad.addColorStop(0, '#0c1f13'); grad.addColorStop(1, '#000000');
-                ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
+</div>
 
-            // 2. LOGO NO TOPO
-            const logoImg = await carregarImagem('logo.png');
-            if (logoImg) {
-                const logoW = 280; const logoH = (logoImg.height / logoImg.width) * logoW;
-                ctx.drawImage(logoImg, (canvas.width / 2) - (logoW / 2), 40, logoW, logoH);
-            }
+<div class="nome">
 
-            // 3. TÍTULO 3D (Extrusão Real)
-            const gradTop = ctx.createLinearGradient(0, 250, 0, 450);
-            gradTop.addColorStop(0, '#fff6cc');
-            gradTop.addColorStop(0.5, '#d4af37');
-            gradTop.addColorStop(1, '#a67c00');
-            
-            draw3DText(ctx, "TRILHEIRO", canvas.width/2, 330, "900 95px 'Montserrat'", gradTop, "#382900", 12);
-            draw3DText(ctx, "OFICIAL", canvas.width/2, 430, "900 95px 'Montserrat'", gradTop, "#382900", 12);
+JONATAS
 
-            // 4. FOTO DE PERFIL COM GLOW
-            if (fotoInput) {
-                const imgUrl = URL.createObjectURL(fotoInput);
-                const userImg = await carregarImagem(imgUrl);
-                if (userImg) {
-                    const cx = canvas.width / 2; const cy = 740; const r = 260; 
-                    
-                    // Efeito Glow Dourado
-                    ctx.beginPath(); ctx.arc(cx, cy, r+10, 0, Math.PI*2);
-                    ctx.shadowColor = "rgba(212, 175, 55, 0.9)"; ctx.shadowBlur = 50;
-                    ctx.fillStyle = "#000"; ctx.fill(); ctx.shadowColor = "transparent";
+</div>
 
-                    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.clip();
-                    ctx.drawImage(userImg, cx - r, cy - r, r*2, r*2); ctx.restore();
-                    
-                    // Bordas Duplas
-                    ctx.beginPath(); ctx.arc(cx, cy, r+12, 0, Math.PI*2); ctx.lineWidth=10; ctx.strokeStyle="#d4af37"; ctx.stroke();
-                    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.lineWidth=4; ctx.strokeStyle="#fff0a8"; ctx.stroke();
-                }
-            }
+<div class="sobrenome">
 
-            // 5. NOME DO USUÁRIO 3D GIGANTE
-            const nomeSplit = nomeRaw.split(' ');
-            const primeiroNome = nomeSplit[0];
-            const sobrenome = nomeSplit.length > 1 ? nomeSplit[1] : "";
-            
-            draw3DText(ctx, primeiroNome.toUpperCase(), canvas.width/2, 1140, "900 120px 'Montserrat'", "#FFFFFF", "#555555", 8);
-            if(sobrenome) {
-                draw3DText(ctx, sobrenome.toUpperCase(), canvas.width/2, 1250, "900 120px 'Montserrat'", "#d4af37", "#4a3600", 8);
-            }
+MARQUES DE ARRUDA
 
-            // 6. PAINEL DE INFORMAÇÕES (Grade 2x2)
-            const boxY = sobrenome ? 1320 : 1230; // Ajusta a altura da caixa se tiver sobrenome
-            
-            ctx.fillStyle = "rgba(10, 15, 12, 0.9)";
-            ctx.strokeStyle = "rgba(212, 175, 55, 0.5)";
-            ctx.lineWidth = 3;
-            ctx.beginPath(); ctx.roundRect((canvas.width/2)-460, boxY, 920, 220, 20); ctx.fill(); ctx.stroke();
-            
-            // Linhas internas da grade
-            ctx.beginPath();
-            ctx.moveTo(canvas.width/2, boxY + 20); ctx.lineTo(canvas.width/2, boxY + 200); // Vertical
-            ctx.moveTo((canvas.width/2)-440, boxY + 110); ctx.lineTo((canvas.width/2)+440, boxY + 110); // Horizontal
-            ctx.strokeStyle = "rgba(212, 175, 55, 0.2)"; ctx.lineWidth = 2; ctx.stroke();
+</div>
 
-            // Textos da Grade
-            ctx.textAlign = "left";
-            
-            // Top Left (Trilheiro Desde)
-            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("🥾 TRILHEIRO DESDE", 100, boxY + 50);
-            ctx.fillStyle = "#d4af37"; ctx.font = "900 45px 'Montserrat'"; ctx.fillText(ano, 100, boxY + 95);
+<div class="grid">
 
-            // Top Right (Carteira)
-            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("🛡️ CARTEIRA Nº", 570, boxY + 50);
-            ctx.fillStyle = "#d4af37"; ctx.font = "900 45px 'Montserrat'"; ctx.fillText(numCarteira, 570, boxY + 95);
+<div class="info">
 
-            // Bottom Left (Cidade)
-            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("📍 CIDADE", 100, boxY + 160);
-            ctx.fillStyle = "#ffffff"; ctx.font = "800 35px 'Montserrat'"; ctx.fillText(cidade.toUpperCase(), 100, boxY + 200);
+<h4>🥾 MEMBRO DESDE</h4>
 
-            // Bottom Right (Emissão)
-            ctx.fillStyle = "#a3a3a3"; ctx.font = "600 24px 'Montserrat'"; ctx.fillText("📅 EMITIDO EM", 570, boxY + 160);
-            ctx.fillStyle = "#ffffff"; ctx.font = "800 35px 'Montserrat'"; ctx.fillText(dataEmissao, 570, boxY + 200);
+<p>2026</p>
 
-            // 7. QR CODE API E SELOS
-            const qrY = boxY + 250;
-            const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://instagram.com/trilheiros.roomt&margin=2";
-            const qrImg = await carregarImagem(qrUrl);
-            
-            if (qrImg) {
-                ctx.drawImage(qrImg, (canvas.width / 2) - 100, qrY, 200, 200);
-                ctx.lineWidth = 4; ctx.strokeStyle = "#d4af37"; ctx.strokeRect((canvas.width / 2) - 100, qrY, 200, 200);
-            }
-            ctx.textAlign = "center"; ctx.font = "800 30px 'Montserrat'"; ctx.fillStyle = "#FFFFFF";
-            ctx.fillText("@trilheiros.roomt", canvas.width / 2, qrY + 240);
+</div>
 
-            // Selos Dourados (Cantos Inferiores)
-            function desenharSelo(cx, cy, texto1, texto2) {
-                ctx.beginPath(); ctx.arc(cx, cy, 60, 0, Math.PI*2);
-                ctx.fillStyle = "rgba(0,0,0,0.8)"; ctx.fill();
-                ctx.lineWidth = 4; ctx.strokeStyle = "#d4af37"; ctx.stroke();
-                ctx.beginPath(); ctx.arc(cx, cy, 50, 0, Math.PI*2); ctx.setLineDash([5, 5]); ctx.stroke(); ctx.setLineDash([]);
-                ctx.textAlign = "center"; ctx.fillStyle = "#d4af37";
-                ctx.font = "800 16px 'Montserrat'"; ctx.fillText(texto1, cx, cy - 5);
-                ctx.fillText(texto2, cx, cy + 15);
-            }
-            desenharSelo(140, qrY + 100, "MEMBRO", "OFICIAL");
-            desenharSelo(940, qrY + 100, "CREDENCIAL", "OFICIAL");
+<div class="info">
 
-            // 8. ASSINATURA COMPLETA
-            ctx.textAlign = "center";
-            ctx.font = "400 100px 'Great Vibes', cursive";
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fillText("Jonatas Marruda", canvas.width / 2, 1820);
+<h4>🛡 CARTEIRA</h4>
 
-            ctx.font = "800 20px 'Montserrat', sans-serif";
-            ctx.fillStyle = "#d4af37";
-            ctx.letterSpacing = "2px";
-            ctx.fillText("GUIA DE TURISMO • FUNDADOR DOS TRILHEIROS DE RONDONÓPOLIS", canvas.width / 2, 1870);
-            ctx.letterSpacing = "0px";
+<p>TR-001</p>
 
-            document.getElementById('form-container').style.display = 'none';
-            document.getElementById('canvas-container').style.display = 'block';
-            document.getElementById('action-buttons').style.display = 'flex';
+</div>
 
-        } catch (erro) {
-            alert("Erro ao processar: " + erro.message);
-        } finally {
-            btn.innerText = "1. Forjar Credencial Premium";
-        }
-    }
+<div class="info">
 
-    function voltarInicio() {
-        document.getElementById('canvas-container').style.display = 'none';
-        document.getElementById('action-buttons').style.display = 'none';
-        document.getElementById('form-container').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+<h4>📍 CIDADE</h4>
 
-    function baixarCracha() {
-        const canvas = document.getElementById('crachaCanvas');
-        const link = document.createElement('a');
-        link.download = 'credencial-vip-trilheiros.jpg';
-        link.href = canvas.toDataURL("image/jpeg", 1.0); 
-        link.click();
-    }
-</script>
+<p>Rondonópolis-MT</p>
+
+</div>
+
+<div class="info">
+
+<h4>📅 EMISSÃO</h4>
+
+<p>17/07/2026</p>
+
+</div>
+
+</div>
+
+<div class="qr">
+
+QR CODE
+
+</div>
+
+<div class="instagram">
+
+@trilheiros.roomt
+
+</div>
+
+<div class="assinatura">
+
+Jonatas Marruda
+
+</div>
+
+<div class="cargo">
+
+GUIA DE TURISMO • FUNDADOR
+
+</div>
+
+</div>
+
+</div>
+
 </body>
+    <!-- ========================================= -->
+<!-- FORMULÁRIO PREMIUM -->
+<!-- ========================================= -->
+
+<div id="painel" style="padding:30px;background:#0d1712;border-top:2px solid rgba(212,175,55,.25)">
+
+<h2 style="text-align:center;color:#d4af37;margin-bottom:20px;">
+PERSONALIZAR CREDENCIAL
+</h2>
+
+<div class="campo">
+
+<label>Nome Completo</label>
+
+<input
+id="nome"
+type="text"
+placeholder="Ex: Jonatas Marques de Arruda">
+
+</div>
+
+<div class="campo">
+
+<label>Membro desde</label>
+
+<input
+id="ano"
+type="number"
+value="2026">
+
+</div>
+
+<div class="campo">
+
+<label>Cidade</label>
+
+<input
+id="cidade"
+type="text"
+value="Rondonópolis - MT">
+
+</div>
+
+<div class="campo">
+
+<label>Foto</label>
+
+<input
+id="foto"
+type="file"
+accept="image/*">
+
+</div>
+
+<button id="gerar">
+
+GERAR CREDENCIAL
+
+</button>
+
+</div>
+
+<style>
+
+.campo{
+
+margin-bottom:18px;
+
+}
+
+.campo label{
+
+display:block;
+
+margin-bottom:8px;
+
+color:#d4af37;
+
+font-weight:700;
+
+}
+
+.campo input{
+
+width:100%;
+
+padding:15px;
+
+border-radius:12px;
+
+border:1px solid rgba(212,175,55,.3);
+
+background:#08110d;
+
+color:white;
+
+font-size:15px;
+
+}
+
+#gerar{
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+cursor:pointer;
+
+border-radius:14px;
+
+margin-top:15px;
+
+font-size:18px;
+
+font-weight:900;
+
+letter-spacing:1px;
+
+background:
+
+linear-gradient(
+
+180deg,
+
+#ffe58c,
+
+#d4af37,
+
+#9a730e);
+
+color:#111;
+
+box-shadow:
+
+0 8px 25px rgba(212,175,55,.35);
+
+transition:.35s;
+
+}
+
+#gerar:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 15px 35px rgba(212,175,55,.45);
+
+}
+
+</style>
+
+<script>
+
+const foto=document.getElementById("foto");
+
+const fotoPerfil=document.getElementById("fotoPerfil");
+
+foto.addEventListener("change",function(){
+
+const arq=this.files[0];
+
+if(!arq)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+fotoPerfil.src=e.target.result;
+
+}
+
+reader.readAsDataURL(arq);
+
+});
+
+document.getElementById("gerar").onclick=function(){
+
+const nome=document.getElementById("nome").value.trim();
+
+const ano=document.getElementById("ano").value;
+
+const cidade=document.getElementById("cidade").value;
+
+if(nome!=""){
+
+const partes=nome.split(" ");
+
+document.querySelector(".nome").innerHTML=partes[0].toUpperCase();
+
+document.querySelector(".sobrenome").innerHTML=
+
+partes.slice(1).join(" ").toUpperCase();
+
+}
+
+document.querySelectorAll(".info p")[0].innerHTML=ano;
+
+document.querySelectorAll(".info p")[2].innerHTML=cidade;
+
+const numero=
+
+"TR-"+
+
+Math.floor(
+
+100+
+
+Math.random()*900
+
+);
+
+document.querySelectorAll(".info p")[1].innerHTML=numero;
+
+const hoje=new Date();
+
+const data=
+
+String(hoje.getDate()).padStart(2,"0")+"/"
+
++
+
+String(hoje.getMonth()+1).padStart(2,"0")+"/"
+
++
+
+hoje.getFullYear();
+
+document.querySelectorAll(".info p")[3].innerHTML=data;
+
+}
+
+</script>
+
 </html>
