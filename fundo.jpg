@@ -1,1 +1,56 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credencial Trilheiros</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; }
+        .app-container { width: 100%; max-width: 400px; padding: 20px; }
+        #cardExport { 
+            width: 100%; aspect-ratio: 9/16; background-size: cover; background-position: center; 
+            border: 4px solid #d4af37; border-radius: 20px; overflow: hidden; position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div id="form-section" style="background:#111; padding:20px; border-radius:15px;">
+            <h3>GERAR CREDENCIAL</h3>
+            <input type="text" id="nome" placeholder="NOME" style="width:100%; padding:10px; margin-bottom:10px;">
+            <input type="file" id="foto" accept="image/*" style="margin-bottom:10px;">
+            <button onclick="gerar()" style="width:100%; padding:15px; background:#d4af37; font-weight:900; border:none; border-radius:5px;">GERAR</button>
+        </div>
+
+        <div id="result-section" style="display:none; margin-top:20px;">
+            <div id="cardExport" style="background-image: url('LINK_DA_SUA_IMAGEM_AQUI');">
+                <div style="width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+                    <h1 style="color:#fff; text-shadow:2px 2px #d4af37;">TRILHEIRO<br>OFICIAL</h1>
+                    <div id="fotoBox" style="width:150px; height:150px; border-radius:50%; border:4px solid #d4af37; overflow:hidden;">
+                        <img id="fotoPerfilRender" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <h2 id="nomeRender" style="color:#fff; margin-top:10px;"></h2>
+                </div>
+            </div>
+            <button onclick="baixar()" style="width:100%; padding:15px; background:#2e7d32; color:#fff; border:none; margin-top:10px; font-weight:900;">BAIXAR IMAGEM</button>
+        </div>
+    </div>
+
+    <script>
+        function gerar() {
+            document.getElementById("nomeRender").textContent = document.getElementById("nome").value.toUpperCase();
+            const f = document.getElementById("foto").files[0];
+            if(f) document.getElementById("fotoPerfilRender").src = URL.createObjectURL(f);
+            document.getElementById("form-section").style.display = "none";
+            document.getElementById("result-section").style.display = "block";
+        }
+        function baixar() {
+            html2canvas(document.getElementById("cardExport"), {scale: 3, useCORS: true}).then(c => {
+                const a = document.createElement("a"); a.download = "Carteira.jpg"; a.href = c.toDataURL("image/jpeg", 1.0); a.click();
+            });
+        }
+    </script>
+</body>
+</html>
