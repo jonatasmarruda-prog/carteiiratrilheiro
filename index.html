@@ -3,164 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Crachá - Trilheiro Oficial</title>
+    <title>Credencial VIP - Trilheiros</title>
+    <!-- Fonte Premium do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
+            font-family: 'Montserrat', sans-serif;
+            /* Fundo da página escuro texturizado/gradiente */
+            background: linear-gradient(135deg, #050a07 0%, #111a14 100%);
             color: #ffffff;
             text-align: center;
             padding: 20px;
             margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .container {
-            max-width: 400px;
-            margin: 0 auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        h1 { color: #4CAF50; }
-        input[type="text"], input[type="file"] {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #333;
-            background: #2a2a2a;
-            color: white;
+            width: 100%;
+            max-width: 420px;
+            /* Efeito Glassmorphism Premium */
+            background: rgba(20, 25, 22, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(212, 175, 55, 0.05);
             box-sizing: border-box;
         }
-        button {
-            background-color: #4CAF50;
+        .logo-form {
+            width: 130px;
+            margin: 0 auto 20px auto;
+            display: block;
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
+        }
+        h1 { 
+            color: #d4af37; /* Dourado premium */ 
+            font-weight: 900;
+            font-size: 28px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+        p {
+            color: #b3b3b3;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 35px;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 22px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #d4af37;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.4);
             color: white;
+            box-sizing: border-box;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            outline: none;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        input[type="file"]::file-selector-button {
+            background: linear-gradient(135deg, #333, #222);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background: #d4af37;
+            color: #000;
+        }
+        button {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8529 100%);
+            color: #0a0a0a;
             border: none;
-            padding: 15px 20px;
+            padding: 18px 20px;
             width: 100%;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
             margin-top: 15px;
-            font-weight: bold;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
         }
-        button:hover { background-color: #45a049; }
+        button:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #e5c158 0%, #bd9532 100%);
+        }
         #canvas-container {
-            margin-top: 20px;
+            margin-top: 35px;
             width: 100%;
             display: none;
         }
         canvas {
             width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
-            border: 2px solid #4CAF50;
+            max-width: 340px;
+            border-radius: 16px;
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.9);
         }
         #downloadBtn {
-            background-color: #2196F3;
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
             display: none;
+            margin-top: 20px;
+        }
+        #downloadBtn:hover {
+            box-shadow: 0 12px 25px rgba(46, 125, 50, 0.5);
+            background: linear-gradient(135deg, #388e3c, #2e7d32);
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Crachá do Trilheiro</h1>
-    <p>Gere seu crachá oficial para os Stories!</p>
-
-    <input type="text" id="nomeInput" placeholder="Seu Nome (Ex: João Silva)" maxlength="20">
-    <input type="text" id="anoInput" placeholder="Trilheiro desde (Ex: 2021)" maxlength="4">
+    <!-- Logo carregada do link da web apenas para visualização no site -->
+    <img src="https://i.postimg.cc/JnF2F9Hw/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros" class="logo-form">
     
-    <label style="display:block; margin-top:10px; text-align:left; margin-left:5%;">Sua foto de perfil:</label>
-    <input type="file" id="fotoInput" accept="image/*">
+    <h1>CREDENCIAL VIP</h1>
+    <p>Gere seu acesso oficial para as redes sociais</p>
 
-    <button id="gerarBtn" onclick="gerarCracha()">1. Gerar Meu Crachá</button>
+    <div class="input-group">
+        <label>Nome do Trilheiro</label>
+        <input type="text" id="nomeInput" placeholder="Ex: Jonatas" maxlength="18">
+    </div>
+
+    <div class="input-group">
+        <label>Trilheiro Desde (Ano)</label>
+        <input type="text" id="anoInput" placeholder="Ex: 2026" maxlength="4">
+    </div>
+
+    <div class="input-group">
+        <label>Cidade - Estado</label>
+        <input type="text" id="cidadeInput" placeholder="Ex: Rondonópolis - MT" maxlength="25">
+    </div>
+    
+    <div class="input-group">
+        <label>Foto de Perfil</label>
+        <input type="file" id="fotoInput" accept="image/*">
+    </div>
+
+    <button id="gerarBtn" onclick="gerarCracha()">1. Forjar Credencial 3D</button>
 
     <div id="canvas-container">
         <canvas id="crachaCanvas" width="1080" height="1920"></canvas>
     </div>
 
-    <button id="downloadBtn" onclick="baixarCracha()">2. Baixar Imagem</button>
+    <button id="downloadBtn" onclick="baixarCracha()">2. Baixar Imagem (Alta Qualidade)</button>
 </div>
 
 <script>
-    // Função auxiliar para carregar imagens sem travar o código
+    // Função segura para carregar imagens
     async function carregarImagem(url) {
         return new Promise((resolve) => {
             const img = new Image();
+            img.crossOrigin = "anonymous"; 
             img.onload = () => resolve(img);
-            img.onerror = () => resolve(null); // Se der erro, retorna nulo e não trava
+            img.onerror = () => resolve(null);
             img.src = url;
         });
     }
 
     async function gerarCracha() {
         const btn = document.getElementById('gerarBtn');
-        btn.innerText = "Gerando aguarde...";
+        btn.innerText = "Processando Arte Premium...";
         
         try {
             const canvas = document.getElementById('crachaCanvas');
             const ctx = canvas.getContext('2d');
-            const nome = document.getElementById('nomeInput').value || 'Nome do Trilheiro';
+            
+            // Capturando os dados digitados ou usando os padrões
+            const nome = document.getElementById('nomeInput').value || 'TRILHEIRO';
             const ano = document.getElementById('anoInput').value || '2026';
+            const cidade = document.getElementById('cidadeInput').value || 'Rondonópolis - MT';
             const fotoInput = document.getElementById('fotoInput').files[0];
 
-            // Limpa o desenho anterior
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // 1. Fundo
+            // 1. FUNDO PREMIUM (Obrigatório estar no GitHub como fundo.jpg)
             const bgImg = await carregarImagem('fundo.jpg');
             if (bgImg) {
                 ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
             } else {
-                ctx.fillStyle = "#1e3d23"; // Cor verde escuro provisória
+                // Fundo de segurança caso o arquivo não exista
+                const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                grad.addColorStop(0, '#1a2a1f');
+                grad.addColorStop(1, '#000000');
+                ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-                alert("Atenção: A imagem 'fundo.jpg' não foi encontrada no GitHub. Foi usado um fundo provisório.");
             }
 
-            // Quadrado escuro para os textos
-            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-            ctx.fillRect(100, 400, 880, 1100); 
-
-            // Textos
-            ctx.textAlign = "center";
-            ctx.fillStyle = "#4CAF50"; 
-            ctx.font = "bold 80px Arial";
-            ctx.fillText("TRILHEIRO OFICIAL", canvas.width / 2, 530);
-
-            ctx.fillStyle = "#FFFFFF";
-            ctx.font = "bold 90px Arial";
-            ctx.fillText(nome.toUpperCase(), canvas.width / 2, 1100);
-
-            ctx.fillStyle = "#AAAAAA";
-            ctx.font = "50px Arial";
-            ctx.fillText("Membro desde: " + ano, canvas.width / 2, 1180);
-
-            ctx.fillStyle = "#FFFFFF";
-            ctx.font = "bold 45px Arial";
-            ctx.fillText("@trilheros.roomt", canvas.width / 2, 1420);
-
-            // 2. QR Code
-            const qrImg = await carregarImagem('qr.png');
-            if (qrImg) {
-                ctx.drawImage(qrImg, (canvas.width / 2) - 150, 1500, 300, 300);
-            } else {
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillRect((canvas.width / 2) - 150, 1500, 300, 300);
-                ctx.fillStyle = "#000000";
-                ctx.font = "30px Arial";
-                ctx.fillText("Sem QR Code", canvas.width / 2, 1650);
+            // 2. LOGO NO TOPO DO CRACHÁ (Obrigatório estar no GitHub como logo.png)
+            const logoImg = await carregarImagem('logo.png');
+            if (logoImg) {
+                const logoWidth = 320;
+                const logoHeight = (logoImg.height / logoImg.width) * logoWidth;
+                const alturaLogo = 120;
+                ctx.drawImage(logoImg, (canvas.width / 2) - (logoWidth / 2), alturaLogo, logoWidth, logoHeight);
             }
 
-            // 3. Foto de Perfil
+            // 3. FOTO DE PERFIL COM BORDA DOURADA
             if (fotoInput) {
                 const imgUrl = URL.createObjectURL(fotoInput);
                 const userImg = await carregarImagem(imgUrl);
                 
                 if (userImg) {
                     const centerX = canvas.width / 2;
-                    const centerY = 780;
-                    const radius = 200;
+                    const centerY = 780; 
+                    const radius = 260; 
 
                     ctx.save();
                     ctx.beginPath();
@@ -168,33 +250,99 @@
                     ctx.closePath();
                     ctx.clip();
                     
+                    // Desenha a foto preenchendo o círculo
                     ctx.drawImage(userImg, centerX - radius, centerY - radius, radius * 2, radius * 2);
                     ctx.restore();
                     
+                    // Desenha a borda dourada premium ao redor da foto
                     ctx.beginPath();
                     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
-                    ctx.lineWidth = 15;
-                    ctx.strokeStyle = "#4CAF50";
+                    ctx.lineWidth = 12;
+                    ctx.strokeStyle = "#d4af37";
                     ctx.stroke();
                 }
             }
 
-            // Mostra o resultado na tela
+            // 4. TEXTO: NOME EM 3D
+            ctx.textAlign = "center";
+            ctx.font = "900 105px 'Montserrat', Arial Black, sans-serif";
+            
+            // Efeito de sombra pesada para dar o volume 3D
+            ctx.shadowColor = "rgba(0, 0, 0, 0.95)";
+            ctx.shadowBlur = 18;
+            ctx.shadowOffsetX = 8;
+            ctx.shadowOffsetY = 12;
+            
+            ctx.fillStyle = "#FFFFFF"; 
+            const alturaNome = 1220; 
+            ctx.fillText(nome.toUpperCase(), canvas.width / 2, alturaNome);
+            
+            // Limpa a sombra para os próximos textos não ficarem borrados
+            ctx.shadowColor = "transparent";
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
+            // 5. CAIXA DE INFORMAÇÕES (Membro Desde e Cidade)
+            // Desenha um fundo translúcido escuro para destacar os dados
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+            ctx.roundRect = function(x, y, w, h, r) {
+                if (w < 2 * r) r = w / 2;
+                if (h < 2 * r) r = h / 2;
+                this.beginPath();
+                this.moveTo(x+r, y);
+                this.arcTo(x+w, y,   x+w, y+h, r);
+                this.arcTo(x+w, y+h, x,   y+h, r);
+                this.arcTo(x,   y+h, x,   y,   r);
+                this.arcTo(x,   y,   x+w, y,   r);
+                this.closePath();
+                return this;
+            }
+            ctx.roundRect((canvas.width/2) - 400, 1280, 800, 160, 20).fill();
+
+            // Textos das Informações (Dourado e Branco)
+            ctx.font = "800 35px 'Montserrat', Arial";
+            
+            ctx.textAlign = "right";
+            ctx.fillStyle = "#d4af37";
+            ctx.fillText("TRILHEIRO DESDE:", (canvas.width/2) - 30, 1340);
+            ctx.fillText("CIDADE:", (canvas.width/2) - 30, 1400);
+
+            ctx.textAlign = "left";
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillText(ano, (canvas.width/2) + 10, 1340);
+            ctx.fillText(cidade.toUpperCase(), (canvas.width/2) + 10, 1400);
+
+            // 6. QR CODE
+            const qrImg = await carregarImagem('qr.png');
+            if (qrImg) {
+                const tamanhoQR = 300;
+                const alturaQR = 1520; 
+                ctx.drawImage(qrImg, (canvas.width / 2) - (tamanhoQR/2), alturaQR, tamanhoQR, tamanhoQR);
+                
+                // Borda dourada fina no QR Code
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "#d4af37";
+                ctx.strokeRect((canvas.width / 2) - (tamanhoQR/2), alturaQR, tamanhoQR, tamanhoQR);
+            }
+
+            // Exibe a imagem pronta na tela e libera o botão de download
             document.getElementById('canvas-container').style.display = 'block';
             document.getElementById('downloadBtn').style.display = 'block';
 
         } catch (erro) {
-            alert("Erro inesperado: " + erro.message);
+            alert("Erro ao processar: " + erro.message);
         } finally {
-            btn.innerText = "1. Gerar Meu Crachá";
+            btn.innerText = "1. Forjar Credencial 3D";
         }
     }
 
     function baixarCracha() {
         const canvas = document.getElementById('crachaCanvas');
         const link = document.createElement('a');
-        link.download = 'cracha-trilheiro.jpg';
-        link.href = canvas.toDataURL("image/jpeg", 0.9);
+        link.download = 'credencial-vip-trilheiros.jpg';
+        // Qualidade 1.0 garante a resolução altíssima para postar nos stories
+        link.href = canvas.toDataURL("image/jpeg", 1.0); 
         link.click();
     }
 </script>
