@@ -3,20 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#07110b">
+<meta name="theme-color" content="#06100b">
 <title>Trilheiros de Rondonópolis — Expedição Mato Grosso</title>
-<style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07110b;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.shell{position:fixed;inset:0;background:#07110b}.game{position:absolute;inset:0;width:100%;height:100%;border:0;background:#07110b}.logo-badge{position:fixed;z-index:9999;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:92px;height:92px;display:flex;align-items:center;justify-content:center;border-radius:24px;background:rgba(5,18,11,.62);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(8px);box-shadow:0 10px 28px rgba(0,0,0,.36);pointer-events:none}.logo-badge img{max-width:82px;max-height:82px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35))}.brand-strip{position:fixed;z-index:9998;left:111px;top:max(13px,env(safe-area-inset-top));padding:8px 12px;border-radius:999px;background:rgba(5,18,11,.58);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(7px);color:#fff;font-size:11px;font-weight:900;letter-spacing:.05em;pointer-events:none;text-shadow:0 2px 5px #000}.brand-strip span{color:#daf576}.loading{position:absolute;inset:0;display:grid;place-items:center;color:#d9e6dc;font-weight:800;text-align:center;padding:30px}.loading small{display:block;color:#8fa596;margin-top:8px;font-weight:600}
-@media(max-width:700px){.logo-badge{width:70px;height:70px;border-radius:18px}.logo-badge img{max-width:62px;max-height:62px}.brand-strip{left:88px;top:13px;font-size:9px;padding:7px 9px}}
-@media(max-width:480px){.brand-strip{display:none}.logo-badge{width:62px;height:62px}.logo-badge img{max-width:55px;max-height:55px}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="shell">
-  <div class="loading">Carregando a aventura dos Trilheiros de Rondonópolis…<small>Expedição Mato Grosso</small></div>
-  <iframe class="game" src="https://trilheiros-expedicao-mt.vercel.app/" title="Trilheiros de Rondonópolis — Expedição Mato Grosso" allow="fullscreen; autoplay" allowfullscreen></iframe>
+<div class="app">
+<div class="top"><div class="brand"><img src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros"><div>TRILHEIROS DE RONDONÓPOLIS<small>EXPEDIÇÃO MATO GROSSO • EDIÇÃO LENDA</small></div></div><div class="topBtns"><button id="music" class="ib">🎵</button><button id="full" class="ib">⛶</button></div></div>
+<section id="home" class="scr on">
+<div class="card hero"><img class="heroLogo" src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros de Rondonópolis"><h1>EXPEDIÇÃO<br><span class="lime">MATO GROSSO</span></h1><p class="sub">A aventura oficial dos Trilheiros de Rondonópolis: cidades, escalada, acampamento, itens secretos, clima surpresa, fantasma do recorde, fotos, conquistas, passaporte e ranking.</p><div class="join"><input id="name" maxlength="18" placeholder="Seu nome de trilheiro"><select id="difficulty"><option value="easy">Fácil</option><option value="normal" selected>Médio</option><option value="hard">Difícil</option></select><button id="go" class="pri">JOGAR ▶</button></div><div class="miniHelp">🎮 Direcional + ✕ Pular + □ Pegar + ○ Correr + △ Ação</div></div>
+<div class="homeGrid"><div class="card miniCard"><h3>🔁 Missão diária</h3><p>Todo dia um desafio diferente para os Trilheiros de Rondonópolis.</p><div id="dailyHome" class="daily"></div></div><div class="card miniCard"><h3>🏅 Conquistas</h3><p id="achHome">Descubra conquistas secretas jogando.</p></div></div>
+</section>
+<section id="mapScreen" class="scr"><div class="card"><div class="mapHead"><div class="mapTitle"><img src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo"><div><h2>🗺️ Mapa de Aventuras</h2><p>Complete uma etapa para desbloquear a próxima.</p></div></div><div class="stats"><span id="hello" class="chip">🥾</span><span id="diffChip" class="chip">Médio</span><span id="dailyChip" class="chip">🎯 Missão diária</span><span id="prog" class="chip">0/7</span></div></div><div class="map"><div class="shape"></div><div class="river"></div>
+<button class="node n0" data-i="0"><span>FASE 1 • POXORÉU</span><b>Morro da Mesa</b><em>⛰️ escalada + amanhecer</em><div class="stars" data-s="0">☆☆☆</div></button>
+<button class="node n1 lock" data-i="1"><span>FASE 2 • PRIMAVERA</span><b>Lagoa Azul</b><em>💦 água + flutuação</em><div class="stars" data-s="1">☆☆☆</div></button>
+<button class="node n2 lock" data-i="2"><span>FASE 3 • VILA BELA</span><b>Cachoeiras</b><em>🌊 rio + pedras</em><div class="stars" data-s="2">☆☆☆</div></button>
+<button class="node n3 lock" data-i="3"><span>FASE ESPECIAL</span><b>Noite dos Trilheiros</b><em>🏕️ barraca + fogueira segura</em><div class="stars" data-s="3">☆☆☆</div></button>
+<button class="node n4 lock" data-i="4"><span>FASE 5 • NOBRES</span><b>Bom Jardim</b><em>🐟 águas + araras</em><div class="stars" data-s="4">☆☆☆</div></button>
+<button class="node n5 lock" data-i="5"><span>FASE 6 • TANGARÁ</span><b>Salto das Nuvens</b><em>☁️ subida + cachoeira</em><div class="stars" data-s="5">☆☆☆</div></button>
+<button class="node n6 lock" data-i="6"><span>FASE 7 • POXORÉU</span><b>Rio Cristalino</b><em>🌿 mata + rio</em><div class="stars" data-s="6">☆☆☆</div></button>
+</div></div>
+<div class="card passport"><h3>📘 Passaporte dos Trilheiros</h3><div id="passport" class="passportGrid"></div><div id="legend" class="legend">🏆 EXPEDIÇÃO MATO GROSSO COMPLETA • TRILHEIRO DE RONDONÓPOLIS — NÍVEL LENDA</div></div>
+<div class="card rank"><h3>🏆 Ranking dos Trilheiros de Rondonópolis</h3><div class="tabs"><button class="tab active" data-r="general">Geral</button><button class="tab" data-r="phase">Por fase</button><button class="tab" data-r="week">Semana</button></div><div id="ranking" class="empty"></div></div>
+</section>
+<section id="game" class="scr"><div class="gameStage" id="gameStage"><canvas id="c" class="gameCanvas" width="1280" height="720"></canvas><img class="gameLogo" src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros">
+<div class="hud"><span id="lh" class="pill">FASE</span><span class="pill">⏱ <b id="time">00:00.0</b></span><span class="pill">🎒 <b id="items">0/5</b></span><span class="pill">💚 <b id="life">3</b></span><span class="pill">⭐ <b id="pts">0</b></span></div><button id="quit" class="exitGame">✕</button><div id="weatherTag" class="weatherTag">☀️ Limpo</div><div id="combo" class="combo">COMBO x1</div><div id="speech" class="speech hide">Bora!</div><div id="actBanner" class="actionBanner">AÇÃO</div><div id="secretToast" class="secretToast">🎁 Item secreto!</div><div class="rotateNote">📱 Deite o celular para jogar maior. Pode continuar assim se preferir.</div>
+<div id="cinema" class="cinema"><div class="cinemaCard"><img src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo"><small>TRILHEIROS DE RONDONÓPOLIS</small><h2 id="cinemaTitle"></h2><p id="cinemaPhrase"></p></div></div>
+<div class="gamepad"><div class="dpad"><button id="up" class="dbtn dup">▲</button><button id="down" class="dbtn ddown">▼</button><button id="left" class="dbtn dleft">◀</button><button id="right" class="dbtn dright">▶</button><div class="dcenter"></div></div><div class="actions"><button id="pick" class="abtn pick"><strong>□</strong>PEGAR</button><button id="jump" class="abtn jump"><strong>✕</strong>PULAR</button><button id="run" class="abtn run"><strong>○</strong>CORRER</button><button id="interact" class="abtn interact"><strong>△</strong>AÇÃO</button></div></div><div class="padHint">🎮 Explore • encontre segredos • tire fotos • faça combos • supere o fantasma</div>
+<div id="finish" class="finishOv"><div class="finish"><div style="font-size:42px">🏆🌄</div><h2>FASE CONCLUÍDA!</h2><p id="ftxt"></p><div class="starsBig" id="fstars">★☆☆</div><div class="sg"><div class="sb"><small>TEMPO</small><b id="ftime"></b></div><div class="sb"><small>PONTOS</small><b id="fpts"></b></div><div class="sb"><small>QUEDAS</small><b id="ffalls"></b></div><div class="sb"><small>SEGREDOS</small><b id="fsecret"></b></div></div><div class="fb"><button id="backMap" class="sec">🗺 MAPA</button><button id="next" class="pri">PRÓXIMA FASE ▶</button></div></div></div>
+<div id="photo" class="photoOv"><div class="photoCard"><img src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo"><div class="photoView"><span>🥾</span></div><div class="photoMeta"><strong id="photoName"></strong><small id="photoMeta"></small></div><button id="closePhoto" class="pri" style="margin-top:12px">VOLTAR AO JOGO</button></div></div>
+<div id="ach" class="achOv"><div class="achCard"><div style="font-size:48px" id="achIcon">🏅</div><h2 id="achTitle"></h2><p id="achText"></p><button id="closeAch" class="pri">CONTINUAR</button></div></div>
+</div></section>
 </div>
-<div class="logo-badge"><img src="https://i.postimg.cc/09t8GNX6/LOGO-TRILHEIROS-Photoroom.png" alt="Logo Trilheiros de Rondonópolis"></div>
-<div class="brand-strip"><span>TRILHEIROS DE RONDONÓPOLIS</span> • EXPEDIÇÃO MATO GROSSO</div>
+<script src="game.js"></script>
 </body>
 </html>
